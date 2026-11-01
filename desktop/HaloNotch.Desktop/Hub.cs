@@ -2,7 +2,7 @@ using static HaloNotch.Loc;
 
 namespace HaloNotch;
 
-public enum NotchTab { Dashboard, Weather, ScreenTime, Clipboard, Files, Media, Calendar, Tools, Usage }
+public enum NotchTab { Dashboard, Weather, ScreenTime, Clipboard, Files, Media, Calendar, Reminders, Tools, Usage }
 
 public static class Tabs
 {
@@ -10,7 +10,7 @@ public static class Tabs
     {
         NotchTab.Dashboard => L("Dashboard"), NotchTab.Weather => L("Weather"), NotchTab.ScreenTime => L("Screen Time"),
         NotchTab.Clipboard => L("Clipboard"), NotchTab.Files => L("Files"), NotchTab.Media => L("Media"),
-        NotchTab.Calendar => L("Calendar"), NotchTab.Tools => L("Tools"), _ => L("Usage"),
+        NotchTab.Calendar => L("Calendar"), NotchTab.Reminders => L("Reminders"), NotchTab.Tools => L("Tools"), _ => L("Usage"),
     };
 
     /// Fluent UI System Icons glyphs (bundled font, Assets/Fonts – the counterpart of the Mac's SF Symbols).
@@ -18,7 +18,7 @@ public static class Tabs
     {
         NotchTab.Dashboard => "", NotchTab.Weather => "", NotchTab.ScreenTime => "",
         NotchTab.Clipboard => "", NotchTab.Files => "", NotchTab.Media => "",
-        NotchTab.Calendar => "", NotchTab.Tools => "", _ => "",
+        NotchTab.Calendar => "", NotchTab.Reminders => "", NotchTab.Tools => "", _ => "",
     };
 }
 
@@ -39,4 +39,5 @@ public static class Hub
     public static readonly CameraController Camera = new();
     public static readonly UsageStore Usage = new();
     public static readonly AudioSpectrum Spectrum = new();
+    public static readonly ReminderStore Reminders = new();
 }

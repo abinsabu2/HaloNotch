@@ -8,3 +8,5 @@
 "NSDocumentsFolderUsageDescription" = "HaloNotchは最新のスクリーンショットをノッチに表示します。";
 "NSDownloadsFolderUsageDescription" = "HaloNotchは最新のスクリーンショットをノッチに表示します。";
 "NSAudioCaptureUsageDescription" = "HaloNotchはイコライザを動かすためにMacで再生中の音を解析します。録音や保存は行いません。";
+"NSRemindersFullAccessUsageDescription" = "HaloNotchはリマインダーの期限になるとノッチを開きます。";
+"NSRemindersUsageDescription" = "HaloNotchはリマインダーの期限になるとノッチを開きます。";

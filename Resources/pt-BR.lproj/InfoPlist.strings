@@ -8,3 +8,5 @@
 "NSDocumentsFolderUsageDescription" = "O HaloNotch mostra suas capturas de tela mais recentes no notch.";
 "NSDownloadsFolderUsageDescription" = "O HaloNotch mostra suas capturas de tela mais recentes no notch.";
 "NSAudioCaptureUsageDescription" = "O HaloNotch analisa o som reproduzido no seu Mac para animar o equalizador. Nada é gravado ou armazenado.";
+"NSRemindersFullAccessUsageDescription" = "O HaloNotch abre o notch quando um dos seus lembretes vence.";
+"NSRemindersUsageDescription" = "O HaloNotch abre o notch quando um dos seus lembretes vence.";

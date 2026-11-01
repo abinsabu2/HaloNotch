@@ -59,6 +59,14 @@ public partial class App : Application
 #endif
             SetupTray();
             RebuildNotches();
+            // Due reminder: opens on the primary display's notch, the others show it when opened.
+            Hub.Reminders.PropertyChanged += (_, e) =>
+            {
+                if (e.PropertyName != nameof(ReminderStore.Current)) return;
+                var target = notches.FirstOrDefault(n => n.Screen.IsPrimary) ?? notches.FirstOrDefault();
+                foreach (var n in notches) n.ShowReminder(Hub.Reminders.Current, open: n == target);
+            };
+            Hub.Reminders.Start();
             desktop.ShutdownRequested += (_, _) => OnQuit();
 #if DEBUG
             if (Environment.GetEnvironmentVariable("HALONOTCH_SNAPSHOT") is { Length: > 0 } dir) Snapshot.Run(notches[0], dir);
@@ -122,6 +130,7 @@ public partial class App : Application
             case NotchTab.Dashboard: { var v = new DashboardView(); v.OpenSettings += OpenSettings; return v; }
             case NotchTab.Weather: { var v = new WeatherView(); v.OpenSettings += OpenSettings; return v; }
             case NotchTab.Calendar: { var v = new CalendarView(); v.OpenSettings += OpenSettings; return v; }
+            case NotchTab.Reminders: { var v = new RemindersView(); v.OpenSettings += () => { OpenSettings(); settings?.ShowTab(3); }; return v; }
             case NotchTab.ScreenTime: return new ScreenTimeView();
             case NotchTab.Clipboard: return new ClipboardView(window, () => new VaultView());
             case NotchTab.Files: return new FilesView();

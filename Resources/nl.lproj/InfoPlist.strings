@@ -8,3 +8,5 @@
 "NSDocumentsFolderUsageDescription" = "HaloNotch toont je nieuwste schermafbeeldingen in de notch.";
 "NSDownloadsFolderUsageDescription" = "HaloNotch toont je nieuwste schermafbeeldingen in de notch.";
 "NSAudioCaptureUsageDescription" = "HaloNotch analyseert het geluid dat je Mac afspeelt om de equalizer te laten bewegen. Er wordt niets opgenomen of bewaard.";
+"NSRemindersFullAccessUsageDescription" = "HaloNotch opent de notch wanneer een van je herinneringen afloopt.";
+"NSRemindersUsageDescription" = "HaloNotch opent de notch wanneer een van je herinneringen afloopt.";

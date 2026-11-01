@@ -2,7 +2,7 @@ import AppKit
 import SwiftUI
 
 enum NotchTab: String, CaseIterable, Identifiable {
-    case dashboard, weather, screenTime, clipboard, files, media, calendar, tools, usage
+    case dashboard, weather, screenTime, clipboard, files, media, calendar, reminders, tools, usage
 
     var id: String { rawValue }
 
@@ -16,6 +16,7 @@ enum NotchTab: String, CaseIterable, Identifiable {
         case .files: return L("Files")
         case .media: return L("Media")
         case .calendar: return L("Calendar")
+        case .reminders: return L("Reminders")
         case .usage: return L("Usage")
         }
     }
@@ -30,6 +31,7 @@ enum NotchTab: String, CaseIterable, Identifiable {
         case .files: return "tray.full"
         case .media: return "music.note"
         case .calendar: return "calendar"
+        case .reminders: return "checklist"
         case .usage: return "chart.bar.xaxis"
         }
     }

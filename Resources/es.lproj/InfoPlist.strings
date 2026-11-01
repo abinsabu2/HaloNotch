@@ -8,3 +8,5 @@
 "NSDocumentsFolderUsageDescription" = "HaloNotch muestra tus capturas más recientes en el notch.";
 "NSDownloadsFolderUsageDescription" = "HaloNotch muestra tus capturas más recientes en el notch.";
 "NSAudioCaptureUsageDescription" = "HaloNotch analiza el sonido que reproduce tu Mac para animar el ecualizador. No se graba ni se guarda nada.";
+"NSRemindersFullAccessUsageDescription" = "HaloNotch abre el notch cuando vence uno de tus recordatorios.";
+"NSRemindersUsageDescription" = "HaloNotch abre el notch cuando vence uno de tus recordatorios.";

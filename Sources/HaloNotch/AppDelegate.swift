@@ -65,6 +65,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
 
+        ReminderStore.shared.onDue = { [weak self] in
+            guard let self else { return }
+            let target = self.notches.values.first { $0.containsMouse } ?? self.notches.values.first
+            target?.showReminder()
+        }
+        ReminderStore.shared.start()
+
         settingsObserver = NotificationCenter.default.addObserver(
             forName: .halonotchOpenSettings, object: nil, queue: .main
         ) { [weak self] _ in

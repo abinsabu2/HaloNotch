@@ -8,3 +8,5 @@
 "NSDocumentsFolderUsageDescription" = "HaloNotch affiche vos dernières captures d’écran dans l’encoche.";
 "NSDownloadsFolderUsageDescription" = "HaloNotch affiche vos dernières captures d’écran dans l’encoche.";
 "NSAudioCaptureUsageDescription" = "HaloNotch analyse le son lu par votre Mac pour animer l’égaliseur. Rien n’est enregistré ni conservé.";
+"NSRemindersFullAccessUsageDescription" = "HaloNotch ouvre l’encoche à l’échéance de l’un de vos rappels.";
+"NSRemindersUsageDescription" = "HaloNotch ouvre l’encoche à l’échéance de l’un de vos rappels.";

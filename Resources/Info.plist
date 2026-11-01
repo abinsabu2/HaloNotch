@@ -46,6 +46,10 @@
 	<string>HaloNotch shows your upcoming events in the notch.</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>HaloNotch shows your upcoming events in the notch.</string>
+	<key>NSRemindersFullAccessUsageDescription</key>
+	<string>HaloNotch opens the notch when one of your reminders is due.</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>HaloNotch opens the notch when one of your reminders is due.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>HaloNotch shows a mirror image of your camera in the notch so you can check yourself before a meeting.</string>
 	<key>NSDesktopFolderUsageDescription</key>

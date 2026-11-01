@@ -34,6 +34,15 @@
             </StackPanel>
           </Grid>
           <ContentControl x:Name="TabHost" Grid.Row="1" Margin="34,0,34,18" />
+          <!-- Due reminder: covers the panel until Done. -->
+          <Border x:Name="ReminderCard" Grid.RowSpan="2" IsVisible="False" Background="{StaticResource PanelBrush}">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+              <TextBlock x:Name="ReminderHeader" Foreground="{StaticResource Accent}" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" />
+              <TextBlock x:Name="ReminderTitle" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" MaxWidth="700" TextAlignment="Center" HorizontalAlignment="Center" />
+              <TextBlock x:Name="ReminderTime" Classes="secondary" HorizontalAlignment="Center" />
+              <Button x:Name="ReminderDone" Classes="pill" HorizontalAlignment="Center" Margin="0,6,0,0" />
+            </StackPanel>
+          </Border>
         </Grid>
 
         <!-- Volume / brightness HUD: the closed notch widens and shows a level bar. -->

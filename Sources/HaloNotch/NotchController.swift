@@ -303,7 +303,7 @@ final class NotchController {
             let inside = panelArea.insetBy(dx: -8, dy: -8).contains(p)
             let editing = panel.isKeyWindow && panel.firstResponder is NSTextView
             let busy = state.isDropTargeted || (NSEvent.pressedMouseButtons & 1) != 0
-                || state.keyboardMode || editing
+                || state.keyboardMode || editing || ReminderStore.shared.current != nil
             if inside || busy {
                 closeTask?.cancel(); closeTask = nil
             } else if closeTask == nil {
@@ -375,6 +375,9 @@ final class NotchController {
         if mode == .live && widthChanged && item != nil { morph(to: .live) }
         settleToRestingMode()
     }
+
+    /// A reminder is due: open the panel (it stays open until Done / Dismiss).
+    func showReminder() { setExpanded(true) }
 
     // MARK: Keyboard mode (⌃⌥V)
 

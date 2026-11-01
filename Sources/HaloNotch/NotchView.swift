@@ -273,6 +273,8 @@ struct ExpandedContent: View {
                     MediaTab(media: media, controls: controls).transition(.opacity.combined(with: .scale(scale: 0.98)))
                 case .calendar:
                     CalendarTab(store: calendar).transition(.opacity.combined(with: .scale(scale: 0.98)))
+                case .reminders:
+                    RemindersTab(store: ReminderStore.shared).transition(.opacity.combined(with: .scale(scale: 0.98)))
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -286,6 +288,62 @@ struct ExpandedContent: View {
             }
         }
         .animation(Theme.spring, value: state.showLanguagePrompt)
+        .overlay {
+            ReminderAlert(store: ReminderStore.shared)
+                .padding(.top, state.notchSize.height + 4)
+        }
+    }
+}
+
+/// Due Apple Reminder: covers the panel until Done or Dismiss.
+private struct ReminderAlert: View {
+    @ObservedObject var store: ReminderStore
+
+    var body: some View {
+        ZStack {
+            if let due = store.current {
+                VStack(spacing: 12) {
+                    Text(L("Reminders").uppercased())
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundStyle(Theme.accent)
+                    Text(due.title)
+                        .font(.system(size: 22, weight: .bold, design: .rounded))
+                        .foregroundStyle(Theme.primary)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(3)
+                    if let date = due.date {
+                        Text(date.formatted(date: Calendar.current.isDateInToday(date) ? .omitted : .abbreviated,
+                                            time: .shortened))
+                            .font(.system(size: 12, weight: .medium))
+                            .foregroundStyle(Theme.secondary)
+                    }
+                    HStack(spacing: 10) {
+                        button(L("Dismiss"), filled: false) { store.dismiss() }
+                        button(L("Done"), filled: true) { store.complete() }
+                    }
+                    .padding(.top, 4)
+                }
+                .padding(16)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(RoundedRectangle(cornerRadius: 22, style: .continuous).fill(Color.black.opacity(0.94)))
+                .modifier(GlassCard(radius: 22))
+                .transition(.opacity.combined(with: .scale(scale: 0.97)))
+            }
+        }
+        .animation(Theme.spring, value: store.current)
+    }
+
+    private func button(_ title: String, filled: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(title)
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(filled ? Color.black : Theme.primary)
+                .padding(.horizontal, 18)
+                .frame(height: 30)
+                .background(Capsule().fill(filled ? AnyShapeStyle(Theme.accentGradient) : AnyShapeStyle(Theme.fill)))
+                .contentShape(Capsule())
+        }
+        .buttonStyle(.plain)
     }
 }
 
@@ -418,7 +476,7 @@ struct HeaderActions: View {
     var body: some View {
         HStack(spacing: 8) {
             switch tab {
-            case .dashboard, .calendar, .media, .weather, .screenTime, .tools, .usage:
+            case .dashboard, .calendar, .reminders, .media, .weather, .screenTime, .tools, .usage:
                 ClockLabel()
                 IconButton(symbol: "gearshape", help: L("Settings")) {
                     NotificationCenter.default.post(name: .halonotchOpenSettings, object: nil)
@@ -3546,6 +3604,94 @@ private struct DayTimeline: View {
                 }
             }
         }
+    }
+}
+
+/// Apple Reminders tab: incomplete reminders, soonest first; the circle marks one done.
+struct RemindersTab: View {
+    @ObservedObject var store: ReminderStore
+
+    var body: some View {
+        if !store.enabled {
+            VStack(spacing: 10) {
+                Image(systemName: "checklist")
+                    .font(.system(size: 22))
+                    .foregroundStyle(Theme.accent)
+                Text(store.denied ? L("Reminders access is off – System Settings → Privacy & Security → Reminders")
+                                  : L("Open the notch when a reminder is due"))
+                    .font(.system(size: 12))
+                    .foregroundStyle(Theme.secondary)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: 360)
+                if !store.denied {
+                    PillButton(title: L("Enable")) { store.enabled = true }
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .modifier(GlassCard())
+        } else if store.items.isEmpty {
+            VStack(spacing: 4) {
+                Image(systemName: "checkmark.circle")
+                    .font(.system(size: 18, weight: .light))
+                    .foregroundStyle(Theme.accent.opacity(0.8))
+                Text(L("No reminders"))
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(Theme.secondary)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else {
+            ScrollView(.vertical, showsIndicators: false) {
+                LazyVGrid(columns: [GridItem(.flexible(), spacing: 8), GridItem(.flexible(), spacing: 8)], spacing: 6) {
+                    ForEach(store.items) { item in
+                        ReminderRow(item: item) { store.complete(item.id) }
+                    }
+                }
+            }
+        }
+    }
+}
+
+private struct ReminderRow: View {
+    let item: ReminderStore.Due
+    let onDone: () -> Void
+
+    var body: some View {
+        HStack(spacing: 9) {
+            Button(action: onDone) {
+                Image(systemName: "circle")
+                    .font(.system(size: 15))
+                    .foregroundStyle(Theme.secondary)
+                    .contentShape(Circle())
+            }
+            .buttonStyle(.plain)
+            .help(L("Done"))
+            VStack(alignment: .leading, spacing: 1) {
+                Text(item.title)
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(Theme.primary)
+                    .lineLimit(1)
+                if let date = item.date {
+                    Text(dueText(date))
+                        .font(.system(size: 9, weight: .medium))
+                        .foregroundStyle(isOverdue(date) ? Theme.accent : Theme.tertiary)
+                }
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(.vertical, 6)
+        .padding(.horizontal, 8)
+        .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Theme.fill))
+    }
+
+    private func isOverdue(_ date: Date) -> Bool {
+        item.hasTime ? date < Date() : date < Calendar.current.startOfDay(for: Date())
+    }
+
+    private func dueText(_ date: Date) -> String {
+        let cal = Calendar.current
+        let day = cal.isDateInToday(date) ? L("Today") : cal.isDateInTomorrow(date) ? L("Tomorrow")
+            : date.formatted(.dateTime.weekday(.abbreviated).day().month(.abbreviated))
+        return item.hasTime ? "\(day) · \(date.formatted(date: .omitted, time: .shortened))" : day
     }
 }
 

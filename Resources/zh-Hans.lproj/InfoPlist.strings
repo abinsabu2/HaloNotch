@@ -8,3 +8,5 @@
 "NSDocumentsFolderUsageDescription" = "HaloNotch 会在刘海区域显示你最新的截屏。";
 "NSDownloadsFolderUsageDescription" = "HaloNotch 会在刘海区域显示你最新的截屏。";
 "NSAudioCaptureUsageDescription" = "HaloNotch 会分析 Mac 正在播放的声音来驱动均衡器，不会录制或存储任何内容。";
+"NSRemindersFullAccessUsageDescription" = "HaloNotch 会在你的提醒事项到期时打开刘海。";
+"NSRemindersUsageDescription" = "HaloNotch 会在你的提醒事项到期时打开刘海。";

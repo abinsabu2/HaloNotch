@@ -115,6 +115,7 @@ struct DashboardSettings: View {
 struct GeneralSettings: View {
     @ObservedObject var language: LanguageSettings
     @AppStorage(Prefs.usageEnabled) private var usageEnabled = false
+    @ObservedObject private var reminders = ReminderStore.shared
 
     var body: some View {
         Form {
@@ -141,6 +142,14 @@ struct GeneralSettings: View {
             }
             Section(L("Usage")) {
                 Toggle(L("Read Claude Code and Codex session logs"), isOn: $usageEnabled)
+            }
+            Section(L("Reminders")) {
+                Toggle(L("Open the notch when a reminder is due"), isOn: $reminders.enabled)
+                if reminders.denied {
+                    Text(L("Reminders access is off – System Settings → Privacy & Security → Reminders"))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
             }
             Section(L("Clipboard shortcut")) {
                 Text(L("⌃⌥V opens the clipboard, keys 1–0 paste an item."))

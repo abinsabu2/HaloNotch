@@ -70,6 +70,9 @@ public partial class NotchWindow : Window
             DockItems.Children.Add(button);
         }
         SettingsButton.Click += (_, _) => OpenSettingsRequested?.Invoke(this);
+        ReminderHeader.Text = L("Reminders").ToUpperInvariant();
+        ReminderDone.Content = L("Done");
+        ReminderDone.Click += (_, _) => Hub.Reminders.Complete();
         ToolTip.SetTip(SettingsButton, L("Settings"));
 
         PointerEntered += (_, _) => { if (!IsExpanded && Hud.IsVisible == false) SetExpanded(true); };
@@ -135,7 +138,7 @@ public partial class NotchWindow : Window
     }
 
     bool Busy =>
-        KeyboardMode || IsDropTargeted || Popups.Open > 0
+        KeyboardMode || IsDropTargeted || Popups.Open > 0 || ReminderCard.IsVisible
         || (IsActive && FocusManager?.GetFocusedElement() is TextBox);
 
     /// Closes the panel once the pointer has been outside for 220 ms (same grace delay as the Mac app).
@@ -198,6 +201,16 @@ public partial class NotchWindow : Window
     {
         holdUntil = DateTime.Now + hold;
         SetExpanded(true);
+    }
+
+    /// Shows (or hides, null) the due reminder; `open` also opens the panel – it stays open until Done.
+    public void ShowReminder(Reminder? reminder, bool open)
+    {
+        ReminderCard.IsVisible = reminder != null;
+        if (reminder == null) return;
+        ReminderTitle.Text = reminder.Title;
+        ReminderTime.Text = reminder.Due.Date == DateTime.Today ? Fmt.Time(reminder.Due) : $"{Fmt.ShortDate(reminder.Due)} · {Fmt.Time(reminder.Due)}";
+        if (open) SetExpanded(true);
     }
 
     /// Raised after opening – the app refreshes calendar, media and weather then (Mac: setExpanded).

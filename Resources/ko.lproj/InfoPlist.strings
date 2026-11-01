@@ -8,3 +8,5 @@
 "NSDocumentsFolderUsageDescription" = "HaloNotch는 최근 스크린샷을 노치에 표시합니다.";
 "NSDownloadsFolderUsageDescription" = "HaloNotch는 최근 스크린샷을 노치에 표시합니다.";
 "NSAudioCaptureUsageDescription" = "HaloNotch는 이퀄라이저를 움직이기 위해 Mac에서 재생되는 소리를 분석합니다. 아무것도 녹음하거나 저장하지 않습니다.";
+"NSRemindersFullAccessUsageDescription" = "HaloNotch는 미리 알림 시간이 되면 노치를 엽니다.";
+"NSRemindersUsageDescription" = "HaloNotch는 미리 알림 시간이 되면 노치를 엽니다.";

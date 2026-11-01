@@ -24,6 +24,18 @@
       "Dodaj kalendarz",
       "添加日历"
     ],
+    "Add reminder": [
+      "Ajouter un rappel",
+      "Erinnerung hinzufügen",
+      "Añadir recordatorio",
+      "Adicionar lembrete",
+      "Aggiungi promemoria",
+      "リマインダーを追加",
+      "Herinnering toevoegen",
+      "미리 알림 추가",
+      "Dodaj przypomnienie",
+      "添加提醒事项"
+    ],
     "Add your Outlook, Google or iCloud calendar link (ICS) in Settings to see your events here.": [
       "Ajoutez le lien (ICS) de votre calendrier Outlook, Google ou iCloud dans les Réglages pour voir vos événements ici.",
       "Füge in den Einstellungen den Kalender-Link (ICS) von Outlook, Google oder iCloud hinzu, um deine Termine hier zu sehen.",
@@ -108,6 +120,18 @@
       "Przenieś do Kosza",
       "移到回收站"
     ],
+    "New reminder": [
+      "Nouveau rappel",
+      "Neue Erinnerung",
+      "Nuevo recordatorio",
+      "Novo lembrete",
+      "Nuovo promemoria",
+      "新規リマインダー",
+      "Nieuwe herinnering",
+      "새로운 미리 알림",
+      "Nowe przypomnienie",
+      "新提醒事项"
+    ],
     "No session logs found on this PC.": [
       "Aucun journal de session trouvé sur ce PC.",
       "Auf diesem PC wurden keine Sitzungsprotokolle gefunden.",
@@ -143,6 +167,18 @@
       "캘린더의 비공개 iCal / ICS 주소를 붙여넣으세요. Outlook: 설정 → 일정 → 공유 일정 → 일정 게시 → ICS 링크. Google: 캘린더 설정 → iCal 형식의 비밀 주소. iCloud: 캘린더 공유 → 공개 캘린더.",
       "Wklej prywatny adres iCal / ICS kalendarza. Outlook: Ustawienia → Kalendarz → Kalendarze udostępnione → Opublikuj kalendarz → link ICS. Google: ustawienia kalendarza → Tajny adres w formacie iCal. iCloud: udostępnij kalendarz → Kalendarz publiczny.",
       "粘贴日历的私有 iCal / ICS 地址。Outlook：设置 → 日历 → 共享日历 → 发布日历 → ICS 链接。Google：日历设置 → iCal 格式的私密地址。iCloud：共享日历 → 公开日历。"
+    ],
+    "Reminders are stored only on this PC. The notch opens when one is due.": [
+      "Les rappels sont enregistrés uniquement sur ce PC. L’encoche s’ouvre à leur échéance.",
+      "Erinnerungen werden nur auf diesem PC gespeichert. Die Notch öffnet sich, wenn eine fällig ist.",
+      "Los recordatorios se guardan solo en este PC. El notch se abre cuando vence uno.",
+      "Os lembretes ficam salvos só neste PC. O notch abre quando um vence.",
+      "I promemoria sono salvati solo su questo PC. Il notch si apre alla scadenza.",
+      "リマインダーはこのPCにのみ保存されます。期限になるとノッチが開きます。",
+      "Herinneringen worden alleen op deze pc opgeslagen. De notch opent wanneer er een afloopt.",
+      "미리 알림은 이 PC에만 저장됩니다. 시간이 되면 노치가 열립니다.",
+      "Przypomnienia są zapisywane tylko na tym komputerze. Wcięcie otwiera się, gdy nadejdzie termin.",
+      "提醒事项仅保存在此电脑上。到期时刘海会打开。"
     ],
     "Show in Explorer": [
       "Afficher dans l’Explorateur",

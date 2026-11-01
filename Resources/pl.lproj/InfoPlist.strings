@@ -8,3 +8,5 @@
 "NSDocumentsFolderUsageDescription" = "HaloNotch pokazuje najnowsze zrzuty ekranu we wcięciu ekranu.";
 "NSDownloadsFolderUsageDescription" = "HaloNotch pokazuje najnowsze zrzuty ekranu we wcięciu ekranu.";
 "NSAudioCaptureUsageDescription" = "HaloNotch analizuje dźwięk odtwarzany przez Maca, aby animować korektor. Nic nie jest nagrywane ani zapisywane.";
+"NSRemindersFullAccessUsageDescription" = "HaloNotch otwiera wcięcie, gdy nadejdzie termin jednego z Twoich przypomnień.";
+"NSRemindersUsageDescription" = "HaloNotch otwiera wcięcie, gdy nadejdzie termin jednego z Twoich przypomnień.";

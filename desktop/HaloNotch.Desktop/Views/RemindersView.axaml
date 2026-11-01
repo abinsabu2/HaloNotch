@@ -1,0 +1,33 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:h="using:HaloNotch"
+             xmlns:v="using:HaloNotch.Views"
+             x:Class="HaloNotch.Views.RemindersView"
+             x:DataType="h:ReminderStore">
+  <Border Classes="card">
+    <Grid RowDefinitions="Auto,*" RowSpacing="8">
+      <Button x:Name="AddButton" Classes="chip" HorizontalAlignment="Right" Click="OnAdd" />
+      <TextBlock Grid.Row="1" x:Name="EmptyText" Classes="tertiary" IsVisible="{Binding NoItems}"
+                 HorizontalAlignment="Center" VerticalAlignment="Center" />
+      <ScrollViewer Grid.Row="1">
+        <ItemsControl ItemsSource="{Binding Items}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate><UniformGrid Columns="2" VerticalAlignment="Top" /></ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="h:Reminder">
+              <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10" Margin="0,3,12,3">
+                <Button Classes="icon" Width="26" Height="26" FontSize="12" Content="&#xF295;"
+                        ToolTip.Tip="{x:Static v:RemindersView.DoneText}" Click="OnDone" />
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                  <TextBlock Text="{Binding Title}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                  <TextBlock Text="{Binding DueText}" Classes="tertiary small" />
+                </StackPanel>
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+    </Grid>
+  </Border>
+</UserControl>

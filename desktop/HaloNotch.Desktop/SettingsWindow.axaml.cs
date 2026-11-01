@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Globalization;
 using System.Reflection;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
@@ -34,6 +35,7 @@ public partial class SettingsWindow : Window
         BuildScreenTime();
         Hub.Weather.PropertyChanged += (_, _) => UpdateWeather();
         Hub.Calendar.PropertyChanged += (_, _) => BuildFeedList();
+        Hub.Reminders.PropertyChanged += (_, _) => BuildReminderList();
     }
 
     public void ShowTab(int index) => Tabs.SelectedIndex = index;
@@ -189,7 +191,7 @@ public partial class SettingsWindow : Window
 
     // MARK: Calendar
 
-    StackPanel? feedList;
+    StackPanel? feedList, reminderList;
 
     void BuildCalendar()
     {
@@ -204,6 +206,38 @@ public partial class SettingsWindow : Window
         p.Add(feedList);
         p.Add(Note(L("Links are stored only on this PC and refreshed every 15 minutes. Treat them like passwords – anyone with the link can read the calendar.")));
         BuildFeedList();
+
+        p.Add(Section(L("Reminders")));
+        p.Add(Note(L("Reminders are stored only on this PC. The notch opens when one is due.")));
+        var title = new TextBox { PlaceholderText = L("New reminder"), Width = 440, HorizontalAlignment = HorizontalAlignment.Left };
+        var next = DateTime.Today.AddHours(DateTime.Now.Hour + 1);
+        var date = new CalendarDatePicker { SelectedDate = next.Date, Width = 150 };
+        var time = new TimePicker
+        {
+            SelectedTime = next.TimeOfDay,
+            ClockIdentifier = CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern.Contains('H') ? "24HourClock" : "12HourClock",
+        };
+        void AddReminder()
+        {
+            if (date.SelectedDate is not { } d || time.SelectedTime is not { } t) return;
+            Hub.Reminders.Add(title.Text ?? "", d.Date + t);
+            title.Text = "";
+        }
+        title.KeyDown += (_, e) => { if (e.Key == Avalonia.Input.Key.Enter) AddReminder(); };
+        p.Add(title);
+        p.Add(Row(date, time, Action(L("Add"), AddReminder)));
+        reminderList = new StackPanel { Spacing = 6 };
+        p.Add(reminderList);
+        BuildReminderList();
+    }
+
+    void BuildReminderList()
+    {
+        if (reminderList == null) return;
+        reminderList.Children.Clear();
+        foreach (var r in Hub.Reminders.Items)
+            reminderList.Children.Add(Row(new TextBlock { Text = $"{Fmt.ShortDate(r.Due)} {Fmt.Time(r.Due)} · {r.Title}", Width = 380, TextTrimming = TextTrimming.CharacterEllipsis },
+                                          Action(L("Remove"), () => Hub.Reminders.Remove(r))));
     }
 
     void BuildFeedList()
