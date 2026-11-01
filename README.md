@@ -13,6 +13,15 @@ A notch hub for the MacBook. Hover over the notch → it expands with four tabs:
 
 Plus a **volume / brightness HUD**: when the volume or the built-in display brightness changes, the notch briefly widens and shows a level bar.
 
+## Screenshots
+
+| | |
+|---|---|
+| ![Dashboard](docs/screenshots/dashboard.png) | ![Weather](docs/screenshots/weather.png) |
+| ![Screen Time](docs/screenshots/screenTime.png) | ![Clipboard](docs/screenshots/clipboard.png) |
+| ![Files](docs/screenshots/files.png) | ![Media](docs/screenshots/media.png) |
+| ![Calendar](docs/screenshots/calendar.png) | ![Tools](docs/screenshots/tools.png) |
+
 ## Build & run
 
 Requires macOS 14+ (target: macOS 26 Tahoe) and Xcode or the Command Line Tools.
