@@ -178,7 +178,7 @@ public partial class App : Application
 
         var tray = new TrayIcon
         {
-            Icon = new WindowIcon(AssetLoader.Open(new Uri("avares://HaloNotch/Assets/AppIcon.ico"))),
+            Icon = new WindowIcon(AssetLoader.Open(new Uri("avares://HaloNotch/Assets/TrayIcon.ico"))),
             ToolTipText = "HaloNotch",
             Menu = menu,
         };

@@ -1,4 +1,5 @@
 import AppKit
+import ServiceManagement
 import SwiftUI
 
 extension Notification.Name {
@@ -70,6 +71,20 @@ final class LanguageSettings: ObservableObject {
             NotificationCenter.default.post(name: .halonotchDisplaysChanged, object: nil)
         }
     }
+
+    /// Login item via SMAppService; reverts the switch if macOS refuses.
+    private static var isLoginItem: Bool { [.enabled, .requiresApproval].contains(SMAppService.mainApp.status) }
+    @Published var launchAtLogin = LanguageSettings.isLoginItem {
+        didSet {
+            guard launchAtLogin != Self.isLoginItem else { return }
+            do {
+                if launchAtLogin { try SMAppService.mainApp.register() } else { try SMAppService.mainApp.unregister() }
+            } catch {
+                NSLog("HaloNotch: launch at login failed: \(error)")
+                DispatchQueue.main.async { self.launchAtLogin = !self.launchAtLogin }
+            }
+        }
+    }
 }
 
 /// Settings → Dashboard: one switch per Dashboard section.
@@ -103,6 +118,9 @@ struct GeneralSettings: View {
 
     var body: some View {
         Form {
+            Section {
+                Toggle(L("Open at Login"), isOn: $language.launchAtLogin)
+            }
             Section(L("Language")) {
                 Picker(L("App language"), selection: $language.selection) {
                     ForEach(AppLanguage.allCases) { lang in

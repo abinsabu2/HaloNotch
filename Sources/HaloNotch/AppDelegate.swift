@@ -76,7 +76,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func setupStatusItem() {
         let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        item.button?.image = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "HaloNotch")
+        // Monochrome version of the app icon (rounded body, notch, halo ring); template adapts to light/dark.
+        let icon = NSImage(size: NSSize(width: 18, height: 18), flipped: true) { r in
+            NSColor.black.set()
+            let body = NSBezierPath(roundedRect: r.insetBy(dx: 1.5, dy: 1.5), xRadius: 4.5, yRadius: 4.5)
+            body.lineWidth = 1.3
+            body.stroke()
+            NSBezierPath(roundedRect: NSRect(x: 6, y: 1, width: 6, height: 3.2), xRadius: 1.2, yRadius: 1.2).fill()
+            let ring = NSBezierPath(ovalIn: NSRect(x: 5.25, y: 6, width: 7.5, height: 7.5))
+            ring.lineWidth = 1.8
+            ring.stroke()
+            return true
+        }
+        icon.isTemplate = true
+        icon.accessibilityDescription = "HaloNotch"
+        item.button?.image = icon
 
         let menu = NSMenu()
         menu.addItem(action(L("Clear Clipboard History"), #selector(clearHistory)))
