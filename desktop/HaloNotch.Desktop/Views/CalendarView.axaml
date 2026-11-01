@@ -1,0 +1,62 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:h="using:HaloNotch"
+             xmlns:v="using:HaloNotch.Views"
+             x:Class="HaloNotch.Views.CalendarView"
+             x:DataType="h:CalendarStore">
+  <Grid ColumnDefinitions="300,*" ColumnSpacing="14">
+    <!-- Month grid -->
+    <Border Classes="card" Padding="12,10">
+      <Grid RowDefinitions="Auto,Auto,*" RowSpacing="4">
+        <Grid ColumnDefinitions="*,Auto">
+          <TextBlock FontSize="16" FontWeight="Bold" VerticalAlignment="Center">
+            <Run Text="{Binding MonthTitle}" /><Run Text=" " /><Run Text="{Binding YearTitle}" Foreground="{StaticResource Accent}" />
+          </TextBlock>
+          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4">
+            <Button x:Name="PrevYear" Classes="icon" Width="26" Height="26" FontSize="10" Content="&#xF629;" Click="OnPrevYear" />
+            <Button x:Name="PrevMonth" Classes="icon" Width="26" Height="26" FontSize="10" Content="&#xF2AB;" Click="OnPrevMonth" />
+            <Button x:Name="NextMonth" Classes="icon" Width="26" Height="26" FontSize="10" Content="&#xF2B1;" Click="OnNextMonth" />
+            <Button x:Name="NextYear" Classes="icon" Width="26" Height="26" FontSize="10" Content="&#xF56A;" Click="OnNextYear" />
+          </StackPanel>
+        </Grid>
+        <UniformGrid x:Name="Weekdays" Grid.Row="1" Columns="7" />
+        <UniformGrid x:Name="Days" Grid.Row="2" Columns="7" />
+      </Grid>
+    </Border>
+
+    <!-- Selected day -->
+    <Border Grid.Column="1" Classes="card">
+      <Grid RowDefinitions="Auto,Auto,*" RowSpacing="6">
+        <TextBlock Text="{Binding DayCaption}" Classes="caps" Foreground="{StaticResource Accent}" />
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto">
+          <TextBlock Text="{Binding DayTitle}" FontSize="20" FontWeight="Bold" />
+          <Button Grid.Column="1" x:Name="TodayButton" Classes="chip" Click="OnToday" />
+        </Grid>
+        <!-- No calendar links yet -->
+        <StackPanel Grid.Row="2" IsVisible="{Binding NoFeeds}" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+          <TextBlock x:Name="NoFeedsText" Classes="secondary" TextWrapping="Wrap" TextAlignment="Center" MaxWidth="420" />
+          <Button x:Name="AddButton" Classes="pill" HorizontalAlignment="Center" Click="OnSettings" />
+        </StackPanel>
+        <Panel Grid.Row="2" IsVisible="{Binding HasFeeds}">
+          <TextBlock x:Name="NoEventsText" Classes="tertiary" IsVisible="{Binding NoDayEntries}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+          <ScrollViewer>
+            <ItemsControl ItemsSource="{Binding DayEntries}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="h:CalendarEntry">
+                  <Grid ColumnDefinitions="110,Auto,*,Auto" ColumnSpacing="10" Margin="0,3">
+                    <TextBlock Text="{Binding RangeText}" Classes="secondary small" FontWeight="SemiBold" VerticalAlignment="Center" />
+                    <Border Grid.Column="1" Width="4" CornerRadius="2" Background="{Binding Color}" />
+                    <TextBlock Grid.Column="2" Text="{Binding Title}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                    <Button Grid.Column="3" Classes="pill" Padding="12,4" FontSize="12" IsVisible="{Binding CanJoin}"
+                            Content="{x:Static v:CalendarView.JoinText}" Click="OnJoin" />
+                  </Grid>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </ScrollViewer>
+        </Panel>
+        <TextBlock Grid.Row="2" Text="{Binding Status}" Classes="tertiary small" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+      </Grid>
+    </Border>
+  </Grid>
+</UserControl>

@@ -1,0 +1,53 @@
+# Windows build of the desktop app (desktop/). Every push touching it builds zips (downloadable as run artifacts);
+# on main it also publishes pre-release desktop-v<Version> (from the csproj) unless that version already exists.
+name: Desktop
+
+on:
+  push:
+    paths: ['desktop/**', 'shared/**', '.github/workflows/desktop.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Publish win-x64 + win-arm64
+        run: |
+          V=$(sed -n 's:.*<Version>\(.*\)</Version>.*:\1:p' desktop/HaloNotch.Desktop/HaloNotch.Desktop.csproj)
+          echo "V=$V" >> "$GITHUB_ENV"
+          for RID in win-x64 win-arm64; do
+            dotnet publish desktop/HaloNotch.Desktop -c Release -f net10.0-windows10.0.19041.0 -r $RID --self-contained \
+              -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true \
+              -p:EnableCompressionInSingleFile=true -p:DebugType=none -o out/$RID
+            7z a "HaloNotch-Windows-$V-$RID.zip" ./out/$RID/HaloNotch.exe   # single file; skip packages' native .pdb files
+          done
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: HaloNotch-Windows-${{ env.V }}
+          path: HaloNotch-Windows-*.zip
+
+      - name: Publish pre-release (main only)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          if gh release view "desktop-v$V" >/dev/null 2>&1; then
+            echo "desktop-v$V already released – bump <Version> in the csproj to publish a new one."
+          else
+            gh release create "desktop-v$V" HaloNotch-Windows-*.zip --target "$GITHUB_SHA" --prerelease \
+              --title "HaloNotch for Windows $V (preview)" --generate-notes \
+              --notes "Unsigned preview: on first launch Windows SmartScreen may warn – click More info → Run anyway."
+          fi

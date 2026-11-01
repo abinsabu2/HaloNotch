@@ -5,6 +5,7 @@ name: Release
 on:
   push:
     branches: [main]
+    paths-ignore: ['desktop/**', 'shared/**', '.github/workflows/desktop.yml']
   workflow_dispatch:
 
 permissions:

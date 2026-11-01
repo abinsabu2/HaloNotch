@@ -1,0 +1,84 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:h="using:HaloNotch"
+             xmlns:v="using:HaloNotch.Views"
+             x:Class="HaloNotch.Views.ScreenTimeView"
+             x:DataType="h:ScreenTimeStore">
+  <Grid ColumnDefinitions="250,*,250" ColumnSpacing="14">
+    <!-- Categories -->
+    <Border Classes="card">
+      <Grid RowDefinitions="Auto,*,Auto">
+        <TextBlock x:Name="CategoriesTitle" Classes="caps" />
+        <Panel Grid.Row="1" Width="130" Height="130" Margin="0,8">
+          <v:Donut Segments="{Binding TodayCategories}" Thickness="16" />
+          <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="{Binding TotalText}" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" />
+            <TextBlock x:Name="TodayLabel" Classes="secondary small" HorizontalAlignment="Center" />
+          </StackPanel>
+        </Panel>
+        <ItemsControl Grid.Row="2" ItemsSource="{Binding TodayCategories}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="h:CategoryUsage">
+              <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8" Margin="0,1">
+                <Ellipse Width="8" Height="8" Fill="{Binding Color}" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Text="{Binding Title}" FontSize="12" Classes="secondary" />
+                <TextBlock Grid.Column="2" Text="{Binding Time}" FontSize="12" Classes="secondary" />
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </Grid>
+    </Border>
+
+    <!-- Top apps -->
+    <Border Grid.Column="1" Classes="card">
+      <Grid RowDefinitions="Auto,*">
+        <Grid ColumnDefinitions="*,Auto">
+          <TextBlock x:Name="TopAppsTitle" Classes="caps" />
+          <TextBlock Grid.Column="1" Text="{Binding AppCount}" Classes="secondary small" FontWeight="SemiBold" />
+        </Grid>
+        <TextBlock Grid.Row="1" x:Name="EmptyText" Classes="tertiary" IsVisible="{Binding NoData}" TextWrapping="Wrap"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" />
+        <ScrollViewer Grid.Row="1" Margin="0,6,0,0" IsVisible="{Binding !NoData}">
+          <ItemsControl ItemsSource="{Binding TopApps}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="h:AppUsage">
+                <Grid ColumnDefinitions="18,Auto,*" ColumnSpacing="10" Margin="0,3">
+                  <TextBlock Text="{Binding Rank}" Classes="tertiary small" VerticalAlignment="Center" />
+                  <Border Grid.Column="1" Width="24" Height="24" CornerRadius="7" Background="{Binding Color}">
+                    <TextBlock Text="{Binding Initial}" Foreground="Black" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                  </Border>
+                  <StackPanel Grid.Column="2" Spacing="3">
+                    <Grid ColumnDefinitions="*,Auto">
+                      <TextBlock Text="{Binding Name}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                      <TextBlock Grid.Column="1" Text="{Binding Time}" FontWeight="SemiBold" />
+                    </Grid>
+                    <ProgressBar Height="3" MinHeight="3" Maximum="1" Value="{Binding Fraction}" Foreground="{Binding Color}" />
+                  </StackPanel>
+                </Grid>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </ScrollViewer>
+      </Grid>
+    </Border>
+
+    <!-- Insights -->
+    <Border Grid.Column="2" Classes="card" IsVisible="{Binding ShowInsights}">
+      <Grid RowDefinitions="Auto,Auto,Auto,*,Auto,Auto" RowSpacing="8">
+        <TextBlock x:Name="InsightsTitle" Classes="caps" />
+        <UniformGrid Grid.Row="1" Columns="2">
+          <Border Background="{StaticResource Fill}" CornerRadius="10" Padding="10,6" Margin="0,0,4,0">
+            <StackPanel><TextBlock Text="{Binding Switches}" FontSize="20" FontWeight="Bold" /><TextBlock x:Name="SwitchesLabel" Classes="tertiary small" /></StackPanel>
+          </Border>
+          <Border Background="{StaticResource Fill}" CornerRadius="10" Padding="10,6" Margin="4,0,0,0">
+            <StackPanel><TextBlock Text="{Binding VsYesterday}" FontSize="20" FontWeight="Bold" /><TextBlock x:Name="YesterdayLabel" Classes="tertiary small" /></StackPanel>
+          </Border>
+        </UniformGrid>
+        <TextBlock Grid.Row="2" Text="{Binding Insight}" FontWeight="SemiBold" TextWrapping="Wrap" FontSize="12" />
+        <TextBlock Grid.Row="4" x:Name="HourTitle" Classes="caps" FontSize="9" />
+        <v:HourBars Grid.Row="5" Height="44" Values="{Binding Hourly}" />
+      </Grid>
+    </Border>
+  </Grid>
+</UserControl>

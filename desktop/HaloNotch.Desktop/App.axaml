@@ -1,0 +1,130 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="HaloNotch.App"
+             RequestedThemeVariant="Dark">
+  <Application.Resources>
+    <!-- Same palette as the Mac app (NotchView.swift → Theme). -->
+    <Color x:Key="AccentColor">#F2BD85</Color>
+    <SolidColorBrush x:Key="Accent" Color="#F2BD85" />
+    <SolidColorBrush x:Key="AccentDeep" Color="#E68C61" />
+    <LinearGradientBrush x:Key="AccentGradient" StartPoint="0%,0%" EndPoint="100%,100%">
+      <GradientStop Offset="0" Color="#F2BD85" />
+      <GradientStop Offset="1" Color="#E68C61" />
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="Primary" Color="White" />
+    <SolidColorBrush x:Key="Secondary" Color="#99FFFFFF" />
+    <SolidColorBrush x:Key="Tertiary" Color="#5CFFFFFF" />
+    <SolidColorBrush x:Key="Divider" Color="#12FFFFFF" />
+    <SolidColorBrush x:Key="Fill" Color="#12FFFFFF" />
+    <SolidColorBrush x:Key="FillHover" Color="#21FFFFFF" />
+    <SolidColorBrush x:Key="Track" Color="#1AFFFFFF" />
+    <LinearGradientBrush x:Key="PanelBrush" StartPoint="50%,0%" EndPoint="50%,100%">
+      <GradientStop Offset="0" Color="Black" />
+      <GradientStop Offset="0.5" Color="Black" />
+      <GradientStop Offset="1" Color="#1C1C1C" />
+    </LinearGradientBrush>
+    <!-- Bundled subset of Microsoft's Fluent UI System Icons (MIT, Assets/Fonts) – same icons on every OS. -->
+    <FontFamily x:Key="Icons">avares://HaloNotch/Assets/Fonts#FluentSystemIcons-Regular</FontFamily>
+  </Application.Resources>
+
+  <Application.Styles>
+    <FluentTheme />
+
+    <Style Selector="TextBlock">
+      <Setter Property="Foreground" Value="{StaticResource Primary}" />
+      <Setter Property="FontSize" Value="13" />
+    </Style>
+    <Style Selector="TextBlock.title"><Setter Property="FontSize" Value="22" /><Setter Property="FontWeight" Value="Bold" /></Style>
+    <Style Selector="TextBlock.h"><Setter Property="FontSize" Value="15" /><Setter Property="FontWeight" Value="SemiBold" /></Style>
+    <Style Selector="TextBlock.big"><Setter Property="FontSize" Value="28" /><Setter Property="FontWeight" Value="Bold" /></Style>
+    <Style Selector="TextBlock.caps">
+      <Setter Property="FontSize" Value="11" /><Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="LetterSpacing" Value="1.2" /><Setter Property="Foreground" Value="{StaticResource Secondary}" />
+    </Style>
+    <Style Selector="TextBlock.secondary"><Setter Property="Foreground" Value="{StaticResource Secondary}" /></Style>
+    <Style Selector="TextBlock.tertiary"><Setter Property="Foreground" Value="{StaticResource Tertiary}" /></Style>
+    <Style Selector="TextBlock.small"><Setter Property="FontSize" Value="11" /></Style>
+    <Style Selector="TextBlock.accent"><Setter Property="Foreground" Value="{StaticResource Accent}" /></Style>
+    <Style Selector="TextBlock.icon">
+      <Setter Property="FontFamily" Value="{StaticResource Icons}" />
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="TextBlock.emoji"><Setter Property="FontFamily" Value="Segoe UI Emoji" /></Style>
+
+    <!-- Frosted card used for every content block. -->
+    <Style Selector="Border.card">
+      <Setter Property="Background" Value="#0DFFFFFF" />
+      <Setter Property="BorderBrush" Value="#14FFFFFF" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="16" />
+      <Setter Property="Padding" Value="14" />
+    </Style>
+    <Style Selector="Border.vline"><Setter Property="Width" Value="1" /><Setter Property="Background" Value="{StaticResource Divider}" /></Style>
+    <Style Selector="Border.hline"><Setter Property="Height" Value="1" /><Setter Property="Background" Value="{StaticResource Divider}" /></Style>
+
+    <!-- Buttons: flat, round; the Fluent template's own backgrounds are replaced. -->
+    <Style Selector="Button.plain, Button.icon, Button.pill, Button.chip, Button.row, Button.dock">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Foreground" Value="{StaticResource Primary}" />
+    </Style>
+    <Style Selector="Button.plain"><Setter Property="Padding" Value="0" /></Style>
+    <Style Selector="Button.icon">
+      <Setter Property="Padding" Value="0" /><Setter Property="Width" Value="32" /><Setter Property="Height" Value="32" />
+      <Setter Property="CornerRadius" Value="16" /><Setter Property="Background" Value="{StaticResource Fill}" />
+      <Setter Property="FontFamily" Value="{StaticResource Icons}" /><Setter Property="FontSize" Value="14" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" /><Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Button.icon.large"><Setter Property="Width" Value="46" /><Setter Property="Height" Value="46" /><Setter Property="CornerRadius" Value="23" /><Setter Property="FontSize" Value="17" /></Style>
+    <Style Selector="Button.icon.hot"><Setter Property="Background" Value="{StaticResource AccentGradient}" /><Setter Property="Foreground" Value="Black" /></Style>
+    <Style Selector="Button.icon.on"><Setter Property="Foreground" Value="{StaticResource Accent}" /></Style>
+    <Style Selector="Button.pill">
+      <Setter Property="Background" Value="{StaticResource AccentGradient}" /><Setter Property="Foreground" Value="Black" />
+      <Setter Property="CornerRadius" Value="999" /><Setter Property="Padding" Value="16,7" /><Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="Button.chip">
+      <Setter Property="Background" Value="{StaticResource Fill}" /><Setter Property="CornerRadius" Value="999" />
+      <Setter Property="Padding" Value="12,5" /><Setter Property="FontSize" Value="12" /><Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="Button.chip.on"><Setter Property="Background" Value="#4D4CD98C" /></Style>
+    <Style Selector="Button.row">
+      <Setter Property="Padding" Value="8,6" /><Setter Property="CornerRadius" Value="10" />
+      <Setter Property="HorizontalAlignment" Value="Stretch" /><Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+    <Style Selector="Button.dock">
+      <Setter Property="Width" Value="40" /><Setter Property="Height" Value="34" /><Setter Property="CornerRadius" Value="12" />
+      <Setter Property="Padding" Value="0" /><Setter Property="FontFamily" Value="{StaticResource Icons}" /><Setter Property="FontSize" Value="16" />
+      <Setter Property="Foreground" Value="{StaticResource Secondary}" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" /><Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Button.dock.selected"><Setter Property="Background" Value="{StaticResource FillHover}" /><Setter Property="Foreground" Value="White" /></Style>
+    <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{StaticResource FillHover}" />
+    </Style>
+    <Style Selector="Button.pill:pointerover /template/ ContentPresenter#PART_ContentPresenter, Button.icon.hot:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{StaticResource Accent}" />
+    </Style>
+    <Style Selector="Button.plain:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Button:pointerover"><Setter Property="Foreground" Value="White" /></Style>
+    <Style Selector="Button.pill:pointerover, Button.icon.hot:pointerover"><Setter Property="Foreground" Value="Black" /></Style>
+
+    <!-- Thin accent progress bars / sliders. -->
+    <Style Selector="ProgressBar">
+      <Setter Property="MinHeight" Value="5" /><Setter Property="Height" Value="5" /><Setter Property="CornerRadius" Value="3" />
+      <Setter Property="Background" Value="{StaticResource Track}" /><Setter Property="Foreground" Value="{StaticResource AccentGradient}" />
+    </Style>
+    <Style Selector="Slider">
+      <Setter Property="Foreground" Value="{StaticResource Accent}" />
+    </Style>
+
+    <Style Selector="TextBox.search">
+      <Setter Property="Background" Value="{StaticResource Fill}" /><Setter Property="BorderThickness" Value="0" />
+      <Setter Property="CornerRadius" Value="12" /><Setter Property="Padding" Value="12,8" /><Setter Property="FontSize" Value="13" />
+    </Style>
+    <Style Selector="ScrollViewer"><Setter Property="VerticalScrollBarVisibility" Value="Hidden" /></Style>
+  </Application.Styles>
+</Application>
