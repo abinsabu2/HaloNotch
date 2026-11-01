@@ -11,7 +11,7 @@
         <Grid ColumnDefinitions="*,Auto">
           <StackPanel Orientation="Horizontal" Spacing="8">
             <TextBlock Classes="icon" Text="&#xE916;" />
-            <TextBlock Text="{Binding PhaseText}" Classes="caps" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding PhaseCaps}" Classes="caps" VerticalAlignment="Center" />
           </StackPanel>
           <TextBlock Grid.Column="1" Text="{Binding SessionsText}" Classes="secondary small" FontWeight="SemiBold" />
         </Grid>

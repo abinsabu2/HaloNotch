@@ -97,6 +97,10 @@ public sealed class ClipboardStore : Observable
         catch (Exception) { return null; }
     }
 
+#if DEBUG
+    public void AddForTest(ClipItem item) => Insert(item);
+#endif
+
     void Insert(ClipItem item)
     {
         if (item.Text != null)

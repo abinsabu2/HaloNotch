@@ -203,6 +203,13 @@ public sealed class CalendarStore : Observable
     public void Join(CalendarEntry entry) { if (entry.JoinUrl != null) Shell.Open(entry.JoinUrl); }
 
 #if DEBUG
+    public void LoadForTest(string ics)
+    {
+        calendars = [(Calendar.Load(ics)!, new SolidColorBrush(Color.Parse(Palette[0])))];
+        Prefs.Set(Prefs.CalendarFeeds, new List<string> { "https://example.invalid/test.ics" });
+        Publish();
+    }
+
     /// Weekly recurring event expands; meeting links are matched by host only.
     public static void SelfCheck()
     {

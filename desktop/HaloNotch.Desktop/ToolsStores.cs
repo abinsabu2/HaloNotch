@@ -35,6 +35,7 @@ public sealed class FocusTimer : Observable
     public double Progress => Duration > 0 ? 1 - Remaining / Duration : 0;
     public string RemainingText => TimeSpan.FromSeconds(Math.Ceiling(Remaining)).ToString(@"mm\:ss");
     public string PhaseText => phase == Phase.Focus ? L("Focus") : L("Break");
+    public string PhaseCaps => PhaseText.ToUpperInvariant();
     public string StartLabel => running ? L("Pause") : IsActive ? L("Resume") : L("Start");
     public string StartGlyph => running ? "" : "";
     public string PresetLabel => CurrentPreset.Label;
