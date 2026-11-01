@@ -8,6 +8,8 @@
 	<string>HaloNotch</string>
 	<key>CFBundleExecutable</key>
 	<string>HaloNotch</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.abinsabu.halonotch</string>
 	<key>CFBundleLocalizations</key>
