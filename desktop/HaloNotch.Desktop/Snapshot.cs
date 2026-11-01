@@ -23,6 +23,16 @@ static class Snapshot
             bitmap.Save(Path.Combine(dir, $"{tab}.png"));
             Console.WriteLine($"SHOT {tab}");
         }
+        var settings = new SettingsWindow();
+        settings.Show();
+        for (int i = 0; i < 5; i++)
+        {
+            settings.ShowTab(i);
+            await Task.Delay(800);
+            using var shot = new RenderTargetBitmap(new PixelSize((int)settings.Bounds.Width * 2, (int)settings.Bounds.Height * 2), new Vector(192, 192));
+            shot.Render(settings);
+            shot.Save(Path.Combine(dir, $"Settings{i}.png"));
+        }
         (Avalonia.Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.Shutdown();
     }
 }

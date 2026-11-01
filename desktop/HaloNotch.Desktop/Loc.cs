@@ -24,6 +24,15 @@ public static class Loc
     public static readonly string Current = Resolve(Prefs.Get(Prefs.Language, "system"));
     static readonly int Column = Array.IndexOf(Shared.Columns, Current);
 
+    /// Call once at launch, before any UI: dates and numbers follow the chosen language too (like the Mac app).
+    public static void ApplyCulture()
+    {
+        if (Prefs.Get(Prefs.Language, "system") == "system") return;
+        var culture = CultureInfo.GetCultureInfo(Current);
+        CultureInfo.DefaultThreadCurrentCulture = CultureInfo.DefaultThreadCurrentUICulture = culture;
+        CultureInfo.CurrentCulture = CultureInfo.CurrentUICulture = culture;
+    }
+
     public static string L(string key) =>
         Column < 0 ? key
         : Shared.Table.TryGetValue(key, out var t) ? t[Column]

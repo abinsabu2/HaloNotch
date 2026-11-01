@@ -144,7 +144,18 @@ public partial class App : Application
 
     void OnFilesDropped(string[] paths) => Hub.Files.Add(paths);
 
-    public void OpenSettings() { }
+    SettingsWindow? settings;
+
+    public void OpenSettings()
+    {
+        if (settings == null)
+        {
+            settings = new SettingsWindow(ApplyDisplayMode, () => { foreach (var n in notches) n.RefreshDashboard(); });
+            settings.Closed += (_, _) => settings = null;
+        }
+        settings.Show();
+        settings.Activate();
+    }
 
     // MARK: Tray menu (Mac: menu bar status item)
 

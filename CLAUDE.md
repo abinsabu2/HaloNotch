@@ -30,6 +30,9 @@ file tray/screenshots, camera mirror and quick controls (volume/brightness).
 
 ## Windows port (`desktop/`, branch `windows-port`)
 - C# / .NET 10 + Avalonia 12, single project `desktop/HaloNotch.Desktop`; Linux later from the same code. See `desktop/README.md`.
+- Two targets: `net10.0-windows10.0.19041.0` (real app; `Windows/` + `#if WINDOWS`) and `net10.0` (runs on this Mac, UI only).
+- Check layouts here: debug build + `HALONOTCH_SNAPSHOT=<dir> HALONOTCH_DATA=<scratch dir>` renders every tab to PNG.
+- Windows-only UI texts go in `desktop/HaloNotch.Desktop/translations.desktop.json` (all 11 languages).
 - .NET SDK on this Mac is user-local: `~/.dotnet/dotnet`. Build: `~/.dotnet/dotnet build desktop/HaloNotch.Desktop`.
 - Translations: `./shared/export-translations.sh` regenerates `shared/translations.json` from `Translations.swift`.
 - CI: `.github/workflows/desktop.yml` (Windows runner); Mac `release.yml` ignores `desktop/**` and `shared/**`.

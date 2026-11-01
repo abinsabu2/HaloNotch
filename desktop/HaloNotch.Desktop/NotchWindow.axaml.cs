@@ -204,6 +204,12 @@ public partial class NotchWindow : Window
     public event Action? Expanded;
     public event Action? Collapsed;
 
+    /// Settings → Dashboard changed which sections are shown.
+    public void RefreshDashboard()
+    {
+        if (views.GetValueOrDefault(NotchTab.Dashboard) is Views.DashboardView dashboard) dashboard.Arrange();
+    }
+
     public void Select(NotchTab tab)
     {
         Selected = tab;

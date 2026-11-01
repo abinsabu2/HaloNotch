@@ -26,7 +26,7 @@
             <Transitions><DoubleTransition Property="Opacity" Duration="0:0:0.18" /></Transitions>
           </Grid.Transitions>
           <Grid ColumnDefinitions="*,Auto" Margin="34,12,22,8">
-            <TextBlock x:Name="TitleText" Classes="title" VerticalAlignment="Center" />
+            <TextBlock x:Name="TitleText" Classes="title" VerticalAlignment="Center" Padding="0,4,0,0" ClipToBounds="False" />
             <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="12">
               <TextBlock x:Name="DateText" Classes="secondary" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center" />
               <TextBlock x:Name="TimeText" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" />

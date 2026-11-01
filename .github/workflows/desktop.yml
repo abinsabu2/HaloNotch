@@ -30,10 +30,10 @@ jobs:
           V=$(sed -n 's:.*<Version>\(.*\)</Version>.*:\1:p' desktop/HaloNotch.Desktop/HaloNotch.Desktop.csproj)
           echo "V=$V" >> "$GITHUB_ENV"
           for RID in win-x64 win-arm64; do
-            dotnet publish desktop/HaloNotch.Desktop -c Release -r $RID --self-contained \
+            dotnet publish desktop/HaloNotch.Desktop -c Release -f net10.0-windows10.0.19041.0 -r $RID --self-contained \
               -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true \
               -p:EnableCompressionInSingleFile=true -p:DebugType=none -o out/$RID
-            7z a "HaloNotch-Windows-$V-$RID.zip" ./out/$RID/*
+            7z a "HaloNotch-Windows-$V-$RID.zip" ./out/$RID/HaloNotch.exe   # single file; skip packages' native .pdb files
           done
 
       - uses: actions/upload-artifact@v4

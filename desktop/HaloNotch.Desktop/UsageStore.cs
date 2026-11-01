@@ -252,12 +252,12 @@ public sealed class UsageStore : Observable
                 if (payload.TryGetProperty("rate_limits", out var limits) && limits.ValueKind == JsonValueKind.Object
                     && (codexLimits == null || when >= codexLimits.Value.Date))
                 {
-                    Limit? L(string key) => limits.TryGetProperty(key, out var l) && l.ValueKind == JsonValueKind.Object
+                    Limit? Read(string key) => limits.TryGetProperty(key, out var l) && l.ValueKind == JsonValueKind.Object
                         && l.TryGetProperty("used_percent", out var used) && used.ValueKind == JsonValueKind.Number
                         && l.TryGetProperty("resets_at", out var resets) && resets.ValueKind == JsonValueKind.Number
                         ? new Limit(used.GetDouble(), (int)Long(l, "window_minutes"), DateTimeOffset.FromUnixTimeSeconds((long)resets.GetDouble()).LocalDateTime)
                         : null;
-                    codexLimits = (when, Str(limits, "plan_type"), L("primary"), L("secondary"));
+                    codexLimits = (when, Str(limits, "plan_type"), Read("primary"), Read("secondary"));
                 }
             }
             catch (JsonException) { }

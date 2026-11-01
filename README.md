@@ -13,6 +13,8 @@ A notch hub for the MacBook. Hover over the notch → it expands with four tabs:
 
 Plus a **volume / brightness HUD**: when the volume or the built-in display brightness changes, the notch briefly widens and shows a level bar.
 
+**Windows (preview):** a port lives in [`desktop/`](desktop/README.md) – same tabs, built with .NET + Avalonia.
+
 ## Screenshots
 
 | | |
