@@ -22,6 +22,35 @@ Plus a **volume / brightness HUD**: when the volume or the built-in display brig
 | ![Files](docs/screenshots/files.png) | ![Media](docs/screenshots/media.png) |
 | ![Calendar](docs/screenshots/calendar.png) | ![Tools](docs/screenshots/tools.png) |
 
+## Install (app is not notarized)
+
+HaloNotch is not signed with an Apple Developer ID, so macOS warns on first launch. Two ways to use it:
+
+**Option 1 – build from source (no warning)**
+
+```bash
+xcode-select --install          # once, if Xcode is not installed
+git clone https://github.com/abinsabu2/HaloNotch.git
+cd HaloNotch
+./build.sh
+open build/HaloNotch.app
+```
+
+Apps built on your own Mac are not quarantined, so Gatekeeper does not block them.
+
+**Option 2 – download the prebuilt zip**
+
+1. Download `HaloNotch-<version>.zip` from [Releases](https://github.com/abinsabu2/HaloNotch/releases), unzip, move `HaloNotch.app` to `/Applications`.
+2. Open it. macOS shows *"Apple could not verify HaloNotch…"* → click **Done**.
+3. Go to **System Settings → Privacy & Security**, scroll down, click **Open Anyway** and confirm. (On macOS 15+ right-click → Open no longer bypasses the warning.)
+
+   Or in Terminal:
+   ```bash
+   xattr -dr com.apple.quarantine /Applications/HaloNotch.app
+   ```
+
+Note: because the build is only ad-hoc signed, macOS may ask for permissions again after each update.
+
 ## Build & run
 
 Requires macOS 14+ (target: macOS 26 Tahoe) and Xcode or the Command Line Tools.
