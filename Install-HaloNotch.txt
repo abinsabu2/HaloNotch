@@ -15,8 +15,12 @@ Requirements
 ----------
 1. Open "HaloNotch-<version>.dmg" (or unzip "HaloNotch-<version>.zip").
 2. Drag "HaloNotch.app" into your "Applications" folder.
-3. Double-click HaloNotch.app → confirm "Open" once.
-   HaloNotch is signed and notarized by Apple, so no extra steps are needed.
+3. Double-click HaloNotch.app. HaloNotch is not notarized by Apple, so macOS shows
+   "Apple could not verify HaloNotch…" → click "Done".
+4. Open System Settings → Privacy & Security, scroll down, click "Open Anyway" and confirm.
+   (On macOS 15+ right-click → Open no longer bypasses the warning.)
+   Or in Terminal:  xattr -dr com.apple.quarantine /Applications/HaloNotch.app
+   Note: macOS may ask for permissions again after each update.
 
 2. Using HaloNotch
 ----------------
