@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>HaloNotch</string>
+	<key>CFBundleExecutable</key>
+	<string>HaloNotch</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.abinsabu.halonotch</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>fr</string>
+		<string>de</string>
+		<string>es</string>
+		<string>pt-BR</string>
+		<string>it</string>
+		<string>ja</string>
+		<string>nl</string>
+		<string>ko</string>
+		<string>pl</string>
+		<string>zh-Hans</string>
+	</array>
+	<key>CFBundleName</key>
+	<string>HaloNotch</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>14.0</string>
+	<key>LSUIElement</key>
+	<true/>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>HaloNotch shows the current track from Music or Spotify and controls playback.</string>
+	<key>NSAudioCaptureUsageDescription</key>
+	<string>HaloNotch analyses the sound your Mac plays to animate the equalizer. Nothing is recorded or stored.</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>HaloNotch shows your upcoming events in the notch.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>HaloNotch shows your upcoming events in the notch.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>HaloNotch shows a mirror image of your camera in the notch so you can check yourself before a meeting.</string>
+	<key>NSDesktopFolderUsageDescription</key>
+	<string>HaloNotch shows your latest screenshots in the notch.</string>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>HaloNotch shows your latest screenshots in the notch.</string>
+	<key>NSDownloadsFolderUsageDescription</key>
+	<string>HaloNotch shows your latest screenshots in the notch.</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>NSLocationUsageDescription</key>
+	<string>HaloNotch shows the weather for your current location in the notch. Your approximate location (about 1 km) is sent to Open-Meteo.com to get the forecast.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>HaloNotch shows the weather for your current location in the notch. Your approximate location (about 1 km) is sent to Open-Meteo.com to get the forecast.</string>
+</dict>
+</plist>

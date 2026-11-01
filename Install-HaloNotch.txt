@@ -1,0 +1,43 @@
+Install HaloNotch - Version: 0.7.3 - 10 2026
+
+INSTALL HALONOTCH
+===============
+
+HaloNotch puts a clipboard (last 10 items), music, calendar, weather, screen time,
+focus timer, notes and more into your MacBook's notch.
+
+Requirements
+------------
+- macOS 14 Sonoma or newer (real equalizer: macOS 14.4+)
+- Works best on a MacBook with a notch (other Macs get a small "fake notch")
+
+1. Install
+----------
+1. Open "HaloNotch-<version>.dmg" (or unzip "HaloNotch-<version>.zip").
+2. Drag "HaloNotch.app" into your "Applications" folder.
+3. Double-click HaloNotch.app → confirm "Open" once.
+   HaloNotch is signed and notarized by Apple, so no extra steps are needed.
+
+2. Using HaloNotch
+----------------
+- Move the mouse to the notch → the panel opens.
+- Ctrl + Option + V → clipboard; keys 1–0 paste an item, Esc closes.
+- Gear icon in the panel → Settings (language, weather, screen time …).
+- Quit: HaloNotch icon in the menu bar → "Quit HaloNotch" (if the icon is hidden by the notch: Terminal → pkill -x HaloNotch).
+
+Permissions (macOS asks when a feature is first used – all optional)
+--------------------------------------------------------------------
+- Paste from other apps → clipboard history
+- Calendars → calendar & meeting countdown
+- Automation (Music / Spotify) → now playing & controls
+- Location → weather (or choose a city in Settings)
+- Camera → camera mirror (only while you use it)
+- System Audio Recording → real equalizer (analysed live, nothing recorded)
+- Accessibility → paste directly with Ctrl + Option + V
+- Desktop folder → screenshot shelf
+
+Privacy: all data (clipboard, notes, screen time) stays on your Mac.
+Weather data comes from Open-Meteo.com.
+
+----------------------------------------------------------------------
+Author: Abin Sabu (based on Tenfold by Siva, MIT License)

@@ -1,0 +1,10 @@
+"NSCalendarsFullAccessUsageDescription" = "HaloNotch pokazuje nadchodzące wydarzenia we wcięciu ekranu.";
+"NSCalendarsUsageDescription" = "HaloNotch pokazuje nadchodzące wydarzenia we wcięciu ekranu.";
+"NSAppleEventsUsageDescription" = "HaloNotch pokazuje bieżący utwór z Muzyki lub Spotify i steruje odtwarzaniem.";
+"NSLocationUsageDescription" = "HaloNotch pokazuje pogodę dla bieżącej lokalizacji we wcięciu ekranu. Przybliżona lokalizacja (ok. 1 km) jest wysyłana do Open-Meteo.com w celu pobrania prognozy.";
+"NSLocationWhenInUseUsageDescription" = "HaloNotch pokazuje pogodę dla bieżącej lokalizacji we wcięciu ekranu. Przybliżona lokalizacja (ok. 1 km) jest wysyłana do Open-Meteo.com w celu pobrania prognozy.";
+"NSCameraUsageDescription" = "HaloNotch pokazuje obraz z kamery we wcięciu ekranu, abyś mógł się sprawdzić przed spotkaniem.";
+"NSDesktopFolderUsageDescription" = "HaloNotch pokazuje najnowsze zrzuty ekranu we wcięciu ekranu.";
+"NSDocumentsFolderUsageDescription" = "HaloNotch pokazuje najnowsze zrzuty ekranu we wcięciu ekranu.";
+"NSDownloadsFolderUsageDescription" = "HaloNotch pokazuje najnowsze zrzuty ekranu we wcięciu ekranu.";
+"NSAudioCaptureUsageDescription" = "HaloNotch analizuje dźwięk odtwarzany przez Maca, aby animować korektor. Nic nie jest nagrywane ani zapisywane.";

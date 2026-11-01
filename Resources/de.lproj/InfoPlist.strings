@@ -1,0 +1,10 @@
+"NSCalendarsFullAccessUsageDescription" = "HaloNotch zeigt deine nächsten Termine in der Notch.";
+"NSCalendarsUsageDescription" = "HaloNotch zeigt deine nächsten Termine in der Notch.";
+"NSAppleEventsUsageDescription" = "HaloNotch zeigt den aktuellen Titel aus Musik oder Spotify und steuert die Wiedergabe.";
+"NSLocationUsageDescription" = "HaloNotch zeigt das Wetter an deinem aktuellen Standort in der Notch. Dein ungefährer Standort (auf ca. 1 km) wird an Open-Meteo.com gesendet, um die Vorhersage abzurufen.";
+"NSLocationWhenInUseUsageDescription" = "HaloNotch zeigt das Wetter an deinem aktuellen Standort in der Notch. Dein ungefährer Standort (auf ca. 1 km) wird an Open-Meteo.com gesendet, um die Vorhersage abzurufen.";
+"NSCameraUsageDescription" = "HaloNotch zeigt dein Kamerabild als Spiegel in der Notch, damit du dich vor einem Meeting prüfen kannst.";
+"NSDesktopFolderUsageDescription" = "HaloNotch zeigt deine neuesten Bildschirmfotos in der Notch.";
+"NSDocumentsFolderUsageDescription" = "HaloNotch zeigt deine neuesten Bildschirmfotos in der Notch.";
+"NSDownloadsFolderUsageDescription" = "HaloNotch zeigt deine neuesten Bildschirmfotos in der Notch.";
+"NSAudioCaptureUsageDescription" = "HaloNotch analysiert den Ton, den dein Mac abspielt, um den Equalizer zu bewegen. Es wird nichts aufgenommen oder gespeichert.";

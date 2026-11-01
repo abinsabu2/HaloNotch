@@ -1,0 +1,10 @@
+"NSCalendarsFullAccessUsageDescription" = "HaloNotchはノッチに次の予定を表示します。";
+"NSCalendarsUsageDescription" = "HaloNotchはノッチに次の予定を表示します。";
+"NSAppleEventsUsageDescription" = "HaloNotchはミュージックまたはSpotifyで再生中の曲を表示し、再生を操作します。";
+"NSLocationUsageDescription" = "HaloNotchは現在地の天気をノッチに表示します。予報を取得するため、おおよその位置情報（約1km）がOpen-Meteo.comに送信されます。";
+"NSLocationWhenInUseUsageDescription" = "HaloNotchは現在地の天気をノッチに表示します。予報を取得するため、おおよその位置情報（約1km）がOpen-Meteo.comに送信されます。";
+"NSCameraUsageDescription" = "HaloNotchは会議前に身だしなみを確認できるよう、カメラの映像をノッチに表示します。";
+"NSDesktopFolderUsageDescription" = "HaloNotchは最新のスクリーンショットをノッチに表示します。";
+"NSDocumentsFolderUsageDescription" = "HaloNotchは最新のスクリーンショットをノッチに表示します。";
+"NSDownloadsFolderUsageDescription" = "HaloNotchは最新のスクリーンショットをノッチに表示します。";
+"NSAudioCaptureUsageDescription" = "HaloNotchはイコライザを動かすためにMacで再生中の音を解析します。録音や保存は行いません。";

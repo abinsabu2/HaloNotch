@@ -1,0 +1,10 @@
+"NSCalendarsFullAccessUsageDescription" = "HaloNotch affiche vos prochains événements dans l’encoche.";
+"NSCalendarsUsageDescription" = "HaloNotch affiche vos prochains événements dans l’encoche.";
+"NSAppleEventsUsageDescription" = "HaloNotch affiche le morceau en cours de Musique ou Spotify et contrôle la lecture.";
+"NSLocationUsageDescription" = "HaloNotch affiche la météo de votre position actuelle dans l’encoche. Votre position approximative (à 1 km près) est envoyée à Open-Meteo.com pour obtenir les prévisions.";
+"NSLocationWhenInUseUsageDescription" = "HaloNotch affiche la météo de votre position actuelle dans l’encoche. Votre position approximative (à 1 km près) est envoyée à Open-Meteo.com pour obtenir les prévisions.";
+"NSCameraUsageDescription" = "HaloNotch affiche l’image de votre caméra dans l’encoche pour vérifier votre apparence avant une réunion.";
+"NSDesktopFolderUsageDescription" = "HaloNotch affiche vos dernières captures d’écran dans l’encoche.";
+"NSDocumentsFolderUsageDescription" = "HaloNotch affiche vos dernières captures d’écran dans l’encoche.";
+"NSDownloadsFolderUsageDescription" = "HaloNotch affiche vos dernières captures d’écran dans l’encoche.";
+"NSAudioCaptureUsageDescription" = "HaloNotch analyse le son lu par votre Mac pour animer l’égaliseur. Rien n’est enregistré ni conservé.";
