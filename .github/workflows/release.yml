@@ -1,0 +1,41 @@
+# Push to main → builds the zip with package.sh and publishes release v<version> (from Resources/Info.plist).
+# Skips when that version is already released: bump CFBundleShortVersionString to ship a new one.
+name: Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read version
+        id: v
+        run: |
+          V=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" Resources/Info.plist)
+          echo "version=$V" >> "$GITHUB_OUTPUT"
+          if gh release view "v$V" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "v$V already released – bump the version in Resources/Info.plist to publish a new one."
+          fi
+
+      - name: Build zip
+        if: steps.v.outputs.exists != 'true'
+        run: ./package.sh
+
+      - name: Publish release
+        if: steps.v.outputs.exists != 'true'
+        run: |
+          V=${{ steps.v.outputs.version }}
+          gh release create "v$V" "dist/HaloNotch-$V.zip" --target "$GITHUB_SHA" \
+            --title "HaloNotch $V" --generate-notes \
+            --notes "Not notarized: after the first launch open System Settings → Privacy & Security → Open Anyway (see Install-HaloNotch.txt)."
