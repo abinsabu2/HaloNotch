@@ -60,6 +60,11 @@ UI texts come from `shared/translations.json` (generated from the Mac app's `Tra
 `./shared/export-translations.sh`) plus `translations.desktop.json` for Windows-only texts. Use
 `L("English text")` / `LF("…%@…", value)` from `Loc.cs`; every new key needs all 11 languages.
 
+## Credits
+
+Icons: subset of Microsoft's [Fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons) (MIT,
+`Assets/Fonts/FluentSystemIcons-LICENSE.txt`), bundled so they look the same on Windows 10/11, macOS and Linux.
+
 ## Privacy
 
 Everything stays on the PC (`%APPDATA%\HaloNotch`), except: the weather location (rounded) goes to Open-Meteo,

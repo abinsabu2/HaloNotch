@@ -16,7 +16,7 @@
         <!-- Now -->
         <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
           <StackPanel Orientation="Horizontal" Spacing="6">
-            <TextBlock Classes="icon" FontSize="12" Text="&#xE81D;" />
+            <TextBlock Classes="icon" FontSize="12" Text="&#xF4F9;" />
             <TextBlock Text="{Binding PlaceName}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
           </StackPanel>
           <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="12" Margin="0,4,0,0">

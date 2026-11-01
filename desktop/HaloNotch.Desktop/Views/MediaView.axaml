@@ -15,7 +15,7 @@
       <!-- Artwork -->
       <Border Width="190" Height="190" CornerRadius="18" ClipToBounds="True" Background="#33FF6B6B" VerticalAlignment="Center">
         <Panel>
-          <TextBlock Classes="icon" Text="&#xE8D6;" FontSize="54" HorizontalAlignment="Center" VerticalAlignment="Center" />
+          <TextBlock Classes="icon" Text="&#xE855;" FontSize="54" HorizontalAlignment="Center" VerticalAlignment="Center" />
           <Image Source="{Binding Artwork}" Stretch="UniformToFill" />
         </Panel>
       </Border>
@@ -34,11 +34,11 @@
           </Grid>
         </StackPanel>
         <StackPanel Grid.Row="5" Orientation="Horizontal" Spacing="14" HorizontalAlignment="Center" Margin="0,6,0,0">
-          <Button Classes="icon plain" Classes.on="{Binding Shuffle}" Content="&#xE8B1;" Click="OnShuffle" Background="Transparent" />
-          <Button Classes="icon large" Content="&#xE892;" Click="OnPrevious" />
+          <Button Classes="icon plain" Classes.on="{Binding Shuffle}" Content="&#xEF37;" Click="OnShuffle" Background="Transparent" />
+          <Button Classes="icon large" Content="&#xF629;" Click="OnPrevious" />
           <Button Classes="icon large hot" Content="{Binding PlayGlyph}" Click="OnPlayPause" Width="54" Height="54" CornerRadius="27" />
-          <Button Classes="icon large" Content="&#xE893;" Click="OnNext" />
-          <Button Classes="icon plain" Classes.on="{Binding Repeat}" Content="&#xE8EE;" Click="OnRepeat" Background="Transparent" />
+          <Button Classes="icon large" Content="&#xF56A;" Click="OnNext" />
+          <Button Classes="icon plain" Classes.on="{Binding Repeat}" Content="&#xF172;" Click="OnRepeat" Background="Transparent" />
         </StackPanel>
       </Grid>
 
@@ -47,7 +47,7 @@
       <!-- Output -->
       <Grid Grid.Column="3" RowDefinitions="Auto,Auto,Auto,*,Auto" x:DataType="h:SystemControls" DataContext="{x:Static h:Hub.Controls}">
         <StackPanel Orientation="Horizontal" Spacing="8">
-          <TextBlock Classes="icon" Text="&#xE7F5;" />
+          <TextBlock Classes="icon" Text="&#xEB43;" />
           <TextBlock x:Name="OutputTitle" Classes="h" />
         </StackPanel>
         <Slider Grid.Row="1" Minimum="0" Maximum="1" Value="{Binding Volume}" IsEnabled="{Binding VolumeAvailable}" Margin="0,8,0,0" />

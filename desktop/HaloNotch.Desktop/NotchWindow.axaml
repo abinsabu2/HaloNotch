@@ -30,7 +30,7 @@
             <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="12">
               <TextBlock x:Name="DateText" Classes="secondary" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center" />
               <TextBlock x:Name="TimeText" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" />
-              <Button x:Name="SettingsButton" Classes="icon" Content="&#xE713;" />
+              <Button x:Name="SettingsButton" Classes="icon" Content="&#xF6AA;" />
             </StackPanel>
           </Grid>
           <ContentControl x:Name="TabHost" Grid.Row="1" Margin="34,0,34,18" />

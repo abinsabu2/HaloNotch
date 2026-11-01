@@ -38,7 +38,7 @@ public sealed class MediaController : Observable
     public string Artist => now?.Artist ?? "";
     public string ArtistAlbum => now == null ? "" : string.IsNullOrEmpty(now.Album) ? now.Artist : $"{now.Artist} · {now.Album}";
     public string Source => now == null ? "" : $"{L("Now Playing")} · {now.App}";
-    public string PlayGlyph => IsPlaying ? "" : "";       // Segoe Fluent: Pause / Play
+    public string PlayGlyph => IsPlaying ? "" : "";       // Pause / Play
     public double Progress => now is { Duration: > 0 } n ? n.Elapsed(DateTime.Now) / n.Duration : 0;
     public string ElapsedText => now == null ? "" : Clock(now.Elapsed(DateTime.Now));
     public string RemainingText => now is { Duration: > 0 } n ? "-" + Clock(n.Duration - n.Elapsed(DateTime.Now)) : "";

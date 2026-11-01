@@ -13,10 +13,10 @@
             <Run Text="{Binding MonthTitle}" /><Run Text=" " /><Run Text="{Binding YearTitle}" Foreground="{StaticResource Accent}" />
           </TextBlock>
           <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4">
-            <Button x:Name="PrevYear" Classes="icon" Width="26" Height="26" FontSize="10" Content="&#xE892;" Click="OnPrevYear" />
-            <Button x:Name="PrevMonth" Classes="icon" Width="26" Height="26" FontSize="10" Content="&#xE76B;" Click="OnPrevMonth" />
-            <Button x:Name="NextMonth" Classes="icon" Width="26" Height="26" FontSize="10" Content="&#xE76C;" Click="OnNextMonth" />
-            <Button x:Name="NextYear" Classes="icon" Width="26" Height="26" FontSize="10" Content="&#xE893;" Click="OnNextYear" />
+            <Button x:Name="PrevYear" Classes="icon" Width="26" Height="26" FontSize="10" Content="&#xF629;" Click="OnPrevYear" />
+            <Button x:Name="PrevMonth" Classes="icon" Width="26" Height="26" FontSize="10" Content="&#xF2AB;" Click="OnPrevMonth" />
+            <Button x:Name="NextMonth" Classes="icon" Width="26" Height="26" FontSize="10" Content="&#xF2B1;" Click="OnNextMonth" />
+            <Button x:Name="NextYear" Classes="icon" Width="26" Height="26" FontSize="10" Content="&#xF56A;" Click="OnNextYear" />
           </StackPanel>
         </Grid>
         <UniformGrid x:Name="Weekdays" Grid.Row="1" Columns="7" />

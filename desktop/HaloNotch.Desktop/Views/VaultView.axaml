@@ -7,7 +7,7 @@
     <Panel>
       <!-- Setup / locked -->
       <StackPanel IsVisible="{Binding !IsUnlocked}" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10" Width="360">
-        <TextBlock Classes="icon" FontSize="26" Text="&#xE72E;" HorizontalAlignment="Center" Foreground="{StaticResource Accent}" />
+        <TextBlock Classes="icon" FontSize="26" Text="&#xE790;" HorizontalAlignment="Center" Foreground="{StaticResource Accent}" />
         <TextBlock x:Name="Intro" TextWrapping="Wrap" TextAlignment="Center" Classes="secondary" FontSize="12" />
         <TextBox x:Name="PassBox" PasswordChar="•" Classes="search" Text="{Binding Passcode}" KeyDown="OnPassKey" />
         <TextBox x:Name="ConfirmBox" PasswordChar="•" Classes="search" Text="{Binding Confirm}" IsVisible="{Binding IsSetup}" KeyDown="OnPassKey" />
@@ -44,9 +44,9 @@
                         <TextBlock Text="{Binding Shown}" Classes="secondary" FontFamily="Cascadia Mono, Consolas, monospace" FontSize="11" TextTrimming="CharacterEllipsis" />
                       </StackPanel>
                       <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4">
-                        <Button Classes="icon" Content="&#xE890;" Click="OnReveal" />
+                        <Button Classes="icon" Content="&#xE5F3;" Click="OnReveal" />
                         <Button Classes="icon" Content="{Binding Copied, Converter={x:Static h:Conv.CopyGlyph}}" Click="OnCopy" />
-                        <Button Classes="icon" Content="&#xE74D;" Click="OnRemove" />
+                        <Button Classes="icon" Content="&#xF34D;" Click="OnRemove" />
                       </StackPanel>
                     </Grid>
                   </Border>

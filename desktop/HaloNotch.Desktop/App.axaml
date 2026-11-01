@@ -23,7 +23,8 @@
       <GradientStop Offset="0.5" Color="Black" />
       <GradientStop Offset="1" Color="#1C1C1C" />
     </LinearGradientBrush>
-    <FontFamily x:Key="Icons">Segoe Fluent Icons, Segoe MDL2 Assets</FontFamily>
+    <!-- Bundled subset of Microsoft's Fluent UI System Icons (MIT, Assets/Fonts) – same icons on every OS. -->
+    <FontFamily x:Key="Icons">avares://HaloNotch/Assets/Fonts#FluentSystemIcons-Regular</FontFamily>
   </Application.Resources>
 
   <Application.Styles>

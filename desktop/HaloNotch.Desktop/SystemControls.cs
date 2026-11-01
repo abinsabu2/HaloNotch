@@ -26,7 +26,7 @@ public sealed class SystemControls : Observable
     public bool BrightnessAvailable => brightnessAvailable;
     public string VolumeText => volumeAvailable ? $"{Math.Round(volume * 100)}" : "–";
     public string BrightnessText => brightnessAvailable ? $"{Math.Round(brightness * 100)}" : "–";
-    public string VolumeGlyph => muted || volume == 0 ? "" : "";
+    public string VolumeGlyph => muted || volume == 0 ? "" : "";
 
     public event Action<HudEvent>? Event;
 

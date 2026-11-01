@@ -15,7 +15,7 @@ public sealed class FileEntry(string path, DateTime date)
     public string Folder => System.IO.Path.GetFileName(System.IO.Path.GetDirectoryName(Path) ?? "");
     public bool IsImage => ClipItem.IsMediaFile(Path) && !IsVideoOrAudio;
     bool IsVideoOrAudio => System.IO.Path.GetExtension(Path).ToLowerInvariant() is ".mp4" or ".mov" or ".m4v" or ".avi" or ".mkv" or ".webm" or ".mp3" or ".wav" or ".m4a" or ".aac" or ".flac" or ".ogg";
-    public string Glyph => Directory.Exists(Path) ? "" : IsVideoOrAudio ? "" : "";
+    public string Glyph => Directory.Exists(Path) ? "" : IsVideoOrAudio ? "" : "";
 
     Bitmap? thumbnail;
     bool tried;

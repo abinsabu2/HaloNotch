@@ -18,7 +18,7 @@
     <Panel x:Name="Pool" IsVisible="False">
       <!-- Up Next -->
       <Grid x:Name="UpNext" Classes="section" RowDefinitions="Auto,*" x:DataType="h:CalendarStore" DataContext="{x:Static h:Hub.Calendar}">
-        <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE787;" /><TextBlock x:Name="UpNextTitle" Classes="h" /></StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE24F;" /><TextBlock x:Name="UpNextTitle" Classes="h" /></StackPanel>
         <StackPanel Grid.Row="1" VerticalAlignment="Center" Spacing="6" IsVisible="{Binding NoFeeds}">
           <TextBlock x:Name="UpNextHint" Classes="secondary" TextWrapping="Wrap" />
           <Button x:Name="AddCalendarButton" Classes="pill" HorizontalAlignment="Left" Click="OnSettings" />
@@ -45,11 +45,11 @@
 
       <!-- Now Playing -->
       <Grid x:Name="NowPlaying" Classes="section" RowDefinitions="Auto,*,Auto" x:DataType="h:MediaController" DataContext="{x:Static h:Hub.Media}">
-        <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE8D6;" /><TextBlock x:Name="NowPlayingTitle" Classes="h" /></StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE855;" /><TextBlock x:Name="NowPlayingTitle" Classes="h" /></StackPanel>
         <Grid Grid.Row="1" ColumnDefinitions="Auto,*" ColumnSpacing="10" VerticalAlignment="Center">
           <Border Width="52" Height="52" CornerRadius="10" ClipToBounds="True" Background="#33FF6B6B">
             <Panel>
-              <TextBlock Classes="icon" Text="&#xE8D6;" FontSize="20" HorizontalAlignment="Center" />
+              <TextBlock Classes="icon" Text="&#xE855;" FontSize="20" HorizontalAlignment="Center" />
               <Image Source="{Binding Artwork}" Stretch="UniformToFill" />
             </Panel>
           </Border>
@@ -59,16 +59,16 @@
           </StackPanel>
         </Grid>
         <Grid Grid.Row="2" ColumnDefinitions="Auto,Auto,Auto,*" ColumnSpacing="8" IsVisible="{Binding HasMedia}">
-          <Button Classes="icon" Content="&#xE892;" Click="OnPrevious" />
+          <Button Classes="icon" Content="&#xF629;" Click="OnPrevious" />
           <Button Grid.Column="1" Classes="icon hot" Content="{Binding PlayGlyph}" Click="OnPlayPause" />
-          <Button Grid.Column="2" Classes="icon" Content="&#xE893;" Click="OnNext" />
+          <Button Grid.Column="2" Classes="icon" Content="&#xF56A;" Click="OnNext" />
           <ProgressBar Grid.Column="3" Maximum="1" Value="{Binding Progress}" VerticalAlignment="Center" />
         </Grid>
       </Grid>
 
       <!-- Focus -->
       <Grid x:Name="FocusSection" Classes="section" RowDefinitions="Auto,*" x:DataType="h:FocusTimer" DataContext="{x:Static h:Hub.Focus}">
-        <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE916;" /><TextBlock x:Name="FocusTitle" Classes="h" /></StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xF827;" /><TextBlock x:Name="FocusTitle" Classes="h" /></StackPanel>
         <Grid Grid.Row="1" ColumnDefinitions="Auto,*" ColumnSpacing="12" VerticalAlignment="Center">
           <Panel Width="64" Height="64">
             <v:Ring Progress="{Binding Progress}" Thickness="4" />
@@ -84,7 +84,7 @@
       <!-- Weather -->
       <Grid x:Name="Weather" Classes="section" RowDefinitions="Auto,*" x:DataType="h:WeatherStore" DataContext="{x:Static h:Hub.Weather}">
         <Grid ColumnDefinitions="Auto,*">
-          <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE753;" /><TextBlock x:Name="WeatherTitle" Classes="h" /></StackPanel>
+          <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xF881;" /><TextBlock x:Name="WeatherTitle" Classes="h" /></StackPanel>
           <TextBlock Grid.Column="1" Text="{Binding PlaceName}" Classes="tertiary small" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="8,0,0,0" />
         </Grid>
         <StackPanel Grid.Row="1" VerticalAlignment="Center" Spacing="2">
@@ -100,7 +100,7 @@
       <!-- Clipboard -->
       <Grid x:Name="Clipboard" Classes="section" RowDefinitions="Auto,*" x:DataType="h:ClipboardStore" DataContext="{x:Static h:Hub.Clipboard}">
         <Grid ColumnDefinitions="*,Auto">
-          <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE77F;" /><TextBlock x:Name="ClipboardTitle" Classes="h" /></StackPanel>
+          <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xF2D6;" /><TextBlock x:Name="ClipboardTitle" Classes="h" /></StackPanel>
           <TextBlock Grid.Column="1" x:Name="ClipCount" Classes="tertiary small" FontWeight="SemiBold" VerticalAlignment="Center" />
         </Grid>
         <TextBlock Grid.Row="1" x:Name="CopySomething" Classes="secondary" HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -117,7 +117,7 @@
 
       <!-- Screen Time -->
       <Grid x:Name="ScreenTime" Classes="section" RowDefinitions="Auto,*" x:DataType="h:ScreenTimeStore" DataContext="{x:Static h:Hub.ScreenTime}">
-        <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE823;" /><TextBlock x:Name="ScreenTimeTitle" Classes="h" /></StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xEF6E;" /><TextBlock x:Name="ScreenTimeTitle" Classes="h" /></StackPanel>
         <Grid Grid.Row="1" ColumnDefinitions="*,Auto" VerticalAlignment="Center">
           <StackPanel>
             <TextBlock Text="{Binding TotalText}" FontSize="30" FontWeight="Bold" />
@@ -130,7 +130,7 @@
       <!-- Day Progress -->
       <Grid x:Name="DayProgress" Classes="section" RowDefinitions="Auto,*">
         <Grid ColumnDefinitions="*,Auto">
-          <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE706;" /><TextBlock x:Name="DayTitle" Classes="h" /></StackPanel>
+          <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE1F8;" /><TextBlock x:Name="DayTitle" Classes="h" /></StackPanel>
           <TextBlock Grid.Column="1" Text="9:00 – 18:00" Classes="tertiary small" FontWeight="SemiBold" VerticalAlignment="Center" />
         </Grid>
         <StackPanel Grid.Row="1" VerticalAlignment="Center" Spacing="6">
@@ -142,10 +142,10 @@
 
       <!-- Quick controls -->
       <Grid x:Name="QuickControls" Classes="section" RowDefinitions="Auto,*" x:DataType="h:SystemControls" DataContext="{x:Static h:Hub.Controls}">
-        <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE9E9;" /><TextBlock x:Name="ControlsTitle" Classes="h" /></StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xF588;" /><TextBlock x:Name="ControlsTitle" Classes="h" /></StackPanel>
         <StackPanel Grid.Row="1" VerticalAlignment="Center" Spacing="2">
           <Grid ColumnDefinitions="Auto,*,32" ColumnSpacing="10" IsEnabled="{Binding BrightnessAvailable}">
-            <TextBlock Classes="icon" Text="&#xE706;" Foreground="{StaticResource Accent}" />
+            <TextBlock Classes="icon" Text="&#xE1F8;" Foreground="{StaticResource Accent}" />
             <Slider Grid.Column="1" Minimum="0" Maximum="1" Value="{Binding Brightness}" />
             <TextBlock Grid.Column="2" Text="{Binding BrightnessText}" FontWeight="SemiBold" VerticalAlignment="Center" TextAlignment="Right" />
           </Grid>

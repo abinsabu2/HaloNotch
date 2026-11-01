@@ -10,7 +10,7 @@
       <Grid RowDefinitions="Auto,*">
         <Grid ColumnDefinitions="*,Auto">
           <StackPanel Orientation="Horizontal" Spacing="8">
-            <TextBlock Classes="icon" Text="&#xE916;" />
+            <TextBlock Classes="icon" Text="&#xF827;" />
             <TextBlock Text="{Binding PhaseCaps}" Classes="caps" VerticalAlignment="Center" />
           </StackPanel>
           <TextBlock Grid.Column="1" Text="{Binding SessionsText}" Classes="secondary small" FontWeight="SemiBold" />
@@ -28,8 +28,8 @@
               </StackPanel>
             </Button>
             <StackPanel Orientation="Horizontal" Spacing="6">
-              <Button x:Name="ResetButton" Classes="icon" Content="&#xE72C;" Click="OnReset" />
-              <Button x:Name="SkipButton" Classes="icon" Content="&#xE893;" Click="OnSkip" />
+              <Button x:Name="ResetButton" Classes="icon" Content="&#xF140;" Click="OnReset" />
+              <Button x:Name="SkipButton" Classes="icon" Content="&#xF56A;" Click="OnSkip" />
               <Button x:Name="PresetButton" Classes="chip" Content="{Binding PresetLabel}" Click="OnPreset" />
             </StackPanel>
           </StackPanel>
@@ -42,7 +42,7 @@
       <Grid RowDefinitions="Auto,*" RowSpacing="8">
         <Grid ColumnDefinitions="*,Auto">
           <StackPanel Orientation="Horizontal" Spacing="8">
-            <TextBlock Classes="icon" Text="&#xE70B;" />
+            <TextBlock Classes="icon" Text="&#xF56C;" />
             <TextBlock x:Name="NotesTitle" Classes="caps" VerticalAlignment="Center" />
           </StackPanel>
           <TextBlock Grid.Column="1" x:Name="SavedLabel" Classes="secondary small" FontWeight="SemiBold" />
@@ -56,7 +56,7 @@
       <Grid RowDefinitions="Auto,*" RowSpacing="8">
         <Grid ColumnDefinitions="*,Auto">
           <StackPanel Orientation="Horizontal" Spacing="8">
-            <TextBlock Classes="icon" Text="&#xE722;" Foreground="#FF6B6B" />
+            <TextBlock Classes="icon" Text="&#xF255;" Foreground="#FF6B6B" />
             <TextBlock x:Name="CameraTitle" Classes="caps" VerticalAlignment="Center" />
           </StackPanel>
           <Button Grid.Column="1" x:Name="CameraOff" Classes="chip" Click="OnCameraOff" IsVisible="{Binding IsRunning}" />
@@ -67,7 +67,7 @@
           </Image>
         </Border>
         <StackPanel Grid.Row="1" IsVisible="{Binding !IsRunning}" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
-          <TextBlock Classes="icon" Text="&#xE77B;" FontSize="30" HorizontalAlignment="Center" Classes.tertiary="True" />
+          <TextBlock Classes="icon" Text="&#xF5BE;" FontSize="30" HorizontalAlignment="Center" Classes.tertiary="True" />
           <Button x:Name="CameraOn" Classes="pill" HorizontalAlignment="Center" Click="OnCameraOn" IsVisible="{Binding !IsDenied}" />
           <TextBlock x:Name="CameraHint" Classes="secondary small" HorizontalAlignment="Center" IsVisible="{Binding !IsDenied}" />
           <TextBlock x:Name="DeniedText" Classes="secondary small" HorizontalAlignment="Center" IsVisible="{Binding IsDenied}" />

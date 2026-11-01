@@ -35,7 +35,7 @@
     <!-- Opt-in -->
     <Border Classes="card" IsVisible="{Binding Disabled}">
       <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="12" MaxWidth="520">
-        <TextBlock Classes="icon" Text="&#xE9D2;" FontSize="28" HorizontalAlignment="Center" Foreground="{StaticResource Accent}" />
+        <TextBlock Classes="icon" Text="&#xF340;" FontSize="28" HorizontalAlignment="Center" Foreground="{StaticResource Accent}" />
         <TextBlock x:Name="OptInText" Classes="secondary" TextWrapping="Wrap" TextAlignment="Center" />
         <Button x:Name="EnableButton" Classes="pill" HorizontalAlignment="Center" Click="OnEnable" />
       </StackPanel>

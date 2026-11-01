@@ -37,7 +37,7 @@ public sealed class FocusTimer : Observable
     public string PhaseText => phase == Phase.Focus ? L("Focus") : L("Break");
     public string PhaseCaps => PhaseText.ToUpperInvariant();
     public string StartLabel => running ? L("Pause") : IsActive ? L("Resume") : L("Start");
-    public string StartGlyph => running ? "" : "";
+    public string StartGlyph => running ? "" : "";
     public string PresetLabel => CurrentPreset.Label;
 
     public int SessionsToday =>

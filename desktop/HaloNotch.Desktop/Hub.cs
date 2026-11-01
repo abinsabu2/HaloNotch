@@ -13,12 +13,12 @@ public static class Tabs
         NotchTab.Calendar => L("Calendar"), NotchTab.Tools => L("Tools"), _ => L("Usage"),
     };
 
-    /// Segoe Fluent Icons glyphs (Windows' counterpart of the Mac's SF Symbols).
+    /// Fluent UI System Icons glyphs (bundled font, Assets/Fonts – the counterpart of the Mac's SF Symbols).
     public static string Glyph(NotchTab tab) => tab switch
     {
-        NotchTab.Dashboard => "", NotchTab.Weather => "", NotchTab.ScreenTime => "",
-        NotchTab.Clipboard => "", NotchTab.Files => "", NotchTab.Media => "",
-        NotchTab.Calendar => "", NotchTab.Tools => "", _ => "",
+        NotchTab.Dashboard => "", NotchTab.Weather => "", NotchTab.ScreenTime => "",
+        NotchTab.Clipboard => "", NotchTab.Files => "", NotchTab.Media => "",
+        NotchTab.Calendar => "", NotchTab.Tools => "", _ => "",
     };
 }
 

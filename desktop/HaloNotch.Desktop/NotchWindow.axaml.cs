@@ -242,7 +242,7 @@ public partial class NotchWindow : Window
     {
         if (IsExpanded) return;
         int generation = ++morphGeneration;
-        HudIcon.Text = e.IsVolume ? (e.Muted || e.Level == 0 ? "" : "") : "";
+        HudIcon.Text = e.IsVolume ? (e.Muted || e.Level == 0 ? "" : "") : "";
         HudLevel.Value = e.Muted ? 0 : e.Level;
         HudValue.Text = e.Muted ? "–" : $"{Math.Round(e.Level * 100)}";
         Body.IsVisible = false;
