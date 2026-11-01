@@ -1,9 +1,9 @@
-Install HaloNotch - Version: 0.7.3 - 10 2026
+Install HaloNotch - Version: 1.0.1 - 11 2026
 
 INSTALL HALONOTCH
 ===============
 
-HaloNotch puts a clipboard (last 10 items), music, calendar, weather, screen time,
+HaloNotch puts a clipboard (last 50 items), music, calendar, weather, screen time,
 focus timer, notes and more into your MacBook's notch.
 
 Requirements

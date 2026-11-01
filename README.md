@@ -1,19 +1,28 @@
-HaloNotch – README - Version: 0.2 - 10 2026
+HaloNotch – README - Version: 0.3 - 11 2026
 
 # HaloNotch
 
-A notch hub for the MacBook. Hover over the notch → it expands with four tabs:
+A notch hub for the MacBook – and, as a preview, for Windows. Hover over the notch (on Windows: the thin handle at the
+top centre of the screen) → it expands into a panel with nine tabs:
 
 | Tab | What it does |
 |---|---|
-| **Clipboard** | Last 10 copied items (text + images). Click = copy back to clipboard, then ⌘V. ✕ on hover removes an item. |
-| **Files** | Drag files onto the notch to park them (references only, nothing is copied). Drag them out again, double-click to open, AirDrop single files or all, right-click for more. |
-| **Media** | Now playing from Spotify or Apple Music with previous / play-pause / next. |
-| **Calendar** | Your events for the rest of today and tomorrow. |
+| **Dashboard** | Up next, now playing, weather, clipboard, screen time, day progress and quick controls at a glance. |
+| **Weather** | Current weather, 12 hours and 7 days (Open-Meteo). |
+| **Screen Time** | Time per app and category today, app switches, activity by hour – stored only on your computer. |
+| **Clipboard** | Last 50 copied items in columns (text, code, links, files, media, colours), pin, search, and a PIN-protected **Vault**. |
+| **Files** | Drag files onto the notch to park them (references only), drag them out again; latest screenshots. |
+| **Media** | Now playing with controls and a real equalizer (Mac: Spotify / Apple Music; Windows: any player). |
+| **Calendar** | Month view and your events, with a Join button for Teams / Zoom / Meet. |
+| **Tools** | Focus timer, quick notes, camera mirror. |
+| **Usage** | Claude Code / Codex token usage from local logs (opt-in). |
 
-Plus a **volume / brightness HUD**: when the volume or the built-in display brightness changes, the notch briefly widens and shows a level bar.
+Plus a **volume / brightness HUD**, and a clipboard shortcut (Mac ⌃⌥V, Windows Ctrl+Alt+V; keys 1–0 paste).
 
-**Windows (preview):** a port lives in [`desktop/`](desktop/README.md) – same tabs, built with .NET + Avalonia.
+| Platform | Download | Details |
+|---|---|---|
+| **macOS** 14+ | `HaloNotch-<version>.zip` on [Releases](https://github.com/abinsabu2/HaloNotch/releases) (tags `v…`) | below |
+| **Windows** 10/11 (preview) | `HaloNotch-Windows-<version>-win-x64.zip` / `-win-arm64.zip` (pre-releases `desktop-v…`) | [`desktop/README.md`](desktop/README.md) |
 
 ## Screenshots
 
@@ -24,7 +33,7 @@ Plus a **volume / brightness HUD**: when the volume or the built-in display brig
 | ![Files](docs/screenshots/files.png) | ![Media](docs/screenshots/media.png) |
 | ![Calendar](docs/screenshots/calendar.png) | ![Tools](docs/screenshots/tools.png) |
 
-## Install (app is not notarized)
+## Install on macOS (app is not notarized)
 
 HaloNotch is not signed with an Apple Developer ID, so macOS warns on first launch. Two ways to use it:
 
@@ -53,12 +62,22 @@ Apps built on your own Mac are not quarantined, so Gatekeeper does not block the
 
 Note: because the build is only ad-hoc signed, macOS may ask for permissions again after each update.
 
+## Install on Windows (preview, unsigned)
+
+1. Download `HaloNotch-Windows-<version>-win-x64.zip` (Intel/AMD) or `-win-arm64.zip` (ARM) from the
+   [Releases](https://github.com/abinsabu2/HaloNotch/releases) page – Windows builds are pre-releases tagged `desktop-v…`.
+2. Unzip and run `HaloNotch.exe` (one self-contained file, no installer, no .NET needed).
+3. Windows SmartScreen may warn on first launch → **More info → Run anyway**.
+4. Move the mouse to the top centre of the screen. Settings → General → **Start with Windows** if you like.
+
+Calendar on Windows uses ICS links (Settings → Calendar). Build, privacy and limitations: [`desktop/README.md`](desktop/README.md).
+
 ## Build & run
 
 Requires macOS 14+ (target: macOS 26 Tahoe) and Xcode or the Command Line Tools.
 
 ```bash
-cd ~/Sites/HaloNotch
+cd HaloNotch
 ./build.sh
 open build/HaloNotch.app
 ```
