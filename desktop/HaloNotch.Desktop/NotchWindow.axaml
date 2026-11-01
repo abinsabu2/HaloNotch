@@ -1,0 +1,14 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="HaloNotch.NotchWindow"
+        Title="HaloNotch"
+        WindowDecorations="None" Topmost="True" ShowInTaskbar="False" ShowActivated="False" CanResize="False"
+        SizeToContent="WidthAndHeight" Background="Transparent" TransparencyLevelHint="Transparent">
+  <!-- Collapsed: thin handle at the top centre (doesn't cover title bars). Hover: expands to the panel. -->
+  <Border x:Name="Shape" Background="#0B0B0D" Width="200" Height="8" CornerRadius="0,0,8,8">
+    <StackPanel x:Name="Body" IsVisible="False" Margin="28,18" Spacing="14">
+      <TextBlock Text="HaloNotch" FontSize="22" FontWeight="Bold" Foreground="White" />
+      <StackPanel x:Name="Dock" Orientation="Horizontal" Spacing="18" />
+    </StackPanel>
+  </Border>
+</Window>

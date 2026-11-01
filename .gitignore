@@ -11,3 +11,6 @@ perf*.log
 sample-*.txt
 # Marketing material: raw screen recordings with personal data
 marketing/
+# .NET build output (desktop/)
+bin/
+obj/

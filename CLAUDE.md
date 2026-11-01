@@ -28,6 +28,12 @@ file tray/screenshots, camera mirror and quick controls (volume/brightness).
 - Performance: `./perf.sh <label>` → `perf-<label>.log` (CPU/mem/threads every 5 s);
   hotspots: `sample HaloNotch 8 -file sample-<label>.txt`
 
+## Windows port (`desktop/`, branch `windows-port`)
+- C# / .NET 10 + Avalonia 12, single project `desktop/HaloNotch.Desktop`; Linux later from the same code. See `desktop/README.md`.
+- .NET SDK on this Mac is user-local: `~/.dotnet/dotnet`. Build: `~/.dotnet/dotnet build desktop/HaloNotch.Desktop`.
+- Translations: `./shared/export-translations.sh` regenerates `shared/translations.json` from `Translations.swift`.
+- CI: `.github/workflows/desktop.yml` (Windows runner); Mac `release.yml` ignores `desktop/**` and `shared/**`.
+
 ## Rules
 - Prefer full Xcode (`DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer`, set by the scripts).
   With Command Line Tools only, SwiftUI macros are missing: do NOT use `@State`, `@Observable`, `#Preview`.
