@@ -1,0 +1,161 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:h="using:HaloNotch"
+             xmlns:v="using:HaloNotch.Views"
+             x:Class="HaloNotch.Views.DashboardView">
+  <UserControl.Styles>
+    <Style Selector="Grid.section"><Setter Property="Margin" Value="14,4,14,4" /></Style>
+  </UserControl.Styles>
+  <Panel>
+    <Grid x:Name="Rows" RowDefinitions="*,Auto,*">
+      <Grid x:Name="TopRow" />
+      <Border Grid.Row="1" Classes="hline" Margin="0,4" />
+      <Grid x:Name="BottomRow" Grid.Row="2" />
+    </Grid>
+    <TextBlock x:Name="AllHidden" Classes="tertiary" IsVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+    <!-- Section pool: moved into the rows by the code-behind (visible ones, in order). -->
+    <Panel x:Name="Pool" IsVisible="False">
+      <!-- Up Next -->
+      <Grid x:Name="UpNext" Classes="section" RowDefinitions="Auto,*" x:DataType="h:CalendarStore" DataContext="{x:Static h:Hub.Calendar}">
+        <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE787;" /><TextBlock x:Name="UpNextTitle" Classes="h" /></StackPanel>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" Spacing="6" IsVisible="{Binding NoFeeds}">
+          <TextBlock x:Name="UpNextHint" Classes="secondary" TextWrapping="Wrap" />
+          <Button x:Name="AddCalendarButton" Classes="pill" HorizontalAlignment="Left" Click="OnSettings" />
+        </StackPanel>
+        <Panel Grid.Row="1" IsVisible="{Binding HasFeeds}">
+          <TextBlock x:Name="NothingPlanned" Classes="secondary" IsVisible="{Binding NoUpcoming}" VerticalAlignment="Center" />
+          <ItemsControl ItemsSource="{Binding Upcoming}" VerticalAlignment="Center" Margin="0,6,0,0">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="h:CalendarEntry">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8" Margin="0,0,0,6">
+                  <Border Width="3" CornerRadius="2" Background="{Binding Color}" />
+                  <StackPanel Grid.Column="1">
+                    <TextBlock Text="{Binding Title}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                    <TextBlock Classes="secondary small"><Run Text="{Binding DayText}" /><Run Text=" · " /><Run Text="{Binding TimeText}" /></TextBlock>
+                  </StackPanel>
+                  <Button Grid.Column="2" Classes="pill" Padding="10,3" FontSize="11" IsVisible="{Binding CanJoin}"
+                          Content="{x:Static v:CalendarView.JoinText}" Click="OnJoin" VerticalAlignment="Center" />
+                </Grid>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </Panel>
+      </Grid>
+
+      <!-- Now Playing -->
+      <Grid x:Name="NowPlaying" Classes="section" RowDefinitions="Auto,*,Auto" x:DataType="h:MediaController" DataContext="{x:Static h:Hub.Media}">
+        <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE8D6;" /><TextBlock x:Name="NowPlayingTitle" Classes="h" /></StackPanel>
+        <Grid Grid.Row="1" ColumnDefinitions="Auto,*" ColumnSpacing="10" VerticalAlignment="Center">
+          <Border Width="52" Height="52" CornerRadius="10" ClipToBounds="True" Background="#33FF6B6B">
+            <Panel>
+              <TextBlock Classes="icon" Text="&#xE8D6;" FontSize="20" HorizontalAlignment="Center" />
+              <Image Source="{Binding Artwork}" Stretch="UniformToFill" />
+            </Panel>
+          </Border>
+          <StackPanel Grid.Column="1" VerticalAlignment="Center">
+            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="14" TextTrimming="CharacterEllipsis" />
+            <TextBlock Text="{Binding Artist}" Classes="secondary" TextTrimming="CharacterEllipsis" />
+          </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" ColumnDefinitions="Auto,Auto,Auto,*" ColumnSpacing="8" IsVisible="{Binding HasMedia}">
+          <Button Classes="icon" Content="&#xE892;" Click="OnPrevious" />
+          <Button Grid.Column="1" Classes="icon hot" Content="{Binding PlayGlyph}" Click="OnPlayPause" />
+          <Button Grid.Column="2" Classes="icon" Content="&#xE893;" Click="OnNext" />
+          <ProgressBar Grid.Column="3" Maximum="1" Value="{Binding Progress}" VerticalAlignment="Center" />
+        </Grid>
+      </Grid>
+
+      <!-- Focus -->
+      <Grid x:Name="FocusSection" Classes="section" RowDefinitions="Auto,*" x:DataType="h:FocusTimer" DataContext="{x:Static h:Hub.Focus}">
+        <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE916;" /><TextBlock x:Name="FocusTitle" Classes="h" /></StackPanel>
+        <Grid Grid.Row="1" ColumnDefinitions="Auto,*" ColumnSpacing="12" VerticalAlignment="Center">
+          <Panel Width="64" Height="64">
+            <v:Ring Progress="{Binding Progress}" Thickness="4" />
+            <TextBlock Text="{Binding RemainingText}" FontWeight="Bold" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Panel>
+          <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+            <TextBlock Text="{Binding PhaseText}" FontWeight="SemiBold" />
+            <Button Classes="chip" Content="{Binding StartLabel}" Click="OnFocusToggle" />
+          </StackPanel>
+        </Grid>
+      </Grid>
+
+      <!-- Weather -->
+      <Grid x:Name="Weather" Classes="section" RowDefinitions="Auto,*" x:DataType="h:WeatherStore" DataContext="{x:Static h:Hub.Weather}">
+        <Grid ColumnDefinitions="Auto,*">
+          <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE753;" /><TextBlock x:Name="WeatherTitle" Classes="h" /></StackPanel>
+          <TextBlock Grid.Column="1" Text="{Binding PlaceName}" Classes="tertiary small" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="8,0,0,0" />
+        </Grid>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" Spacing="2">
+          <StackPanel Orientation="Horizontal" Spacing="10">
+            <TextBlock Text="{Binding Temperature}" FontSize="36" FontWeight="Bold" />
+            <TextBlock Text="{Binding Icon}" Classes="emoji" FontSize="26" VerticalAlignment="Center" />
+          </StackPanel>
+          <TextBlock Text="{Binding Description}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+          <TextBlock Text="{Binding HighLow}" Classes="secondary small" FontWeight="SemiBold" />
+        </StackPanel>
+      </Grid>
+
+      <!-- Clipboard -->
+      <Grid x:Name="Clipboard" Classes="section" RowDefinitions="Auto,*" x:DataType="h:ClipboardStore" DataContext="{x:Static h:Hub.Clipboard}">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE77F;" /><TextBlock x:Name="ClipboardTitle" Classes="h" /></StackPanel>
+          <TextBlock Grid.Column="1" x:Name="ClipCount" Classes="tertiary small" FontWeight="SemiBold" VerticalAlignment="Center" />
+        </Grid>
+        <TextBlock Grid.Row="1" x:Name="CopySomething" Classes="secondary" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding Recent}" Margin="0,6,0,0">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="h:ClipItem">
+              <Button Classes="row" Click="OnClipCopy" Padding="6,3" Margin="0,0,0,2">
+                <TextBlock Text="{Binding Preview}" FontSize="12" TextTrimming="CharacterEllipsis" MaxLines="1" />
+              </Button>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </Grid>
+
+      <!-- Screen Time -->
+      <Grid x:Name="ScreenTime" Classes="section" RowDefinitions="Auto,*" x:DataType="h:ScreenTimeStore" DataContext="{x:Static h:Hub.ScreenTime}">
+        <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE823;" /><TextBlock x:Name="ScreenTimeTitle" Classes="h" /></StackPanel>
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+          <StackPanel>
+            <TextBlock Text="{Binding TotalText}" FontSize="30" FontWeight="Bold" />
+            <TextBlock Text="{Binding TopAppText}" Classes="secondary" TextTrimming="CharacterEllipsis" />
+          </StackPanel>
+          <v:Donut Grid.Column="1" Width="64" Height="64" Thickness="10" Segments="{Binding TodayCategories}" />
+        </Grid>
+      </Grid>
+
+      <!-- Day Progress -->
+      <Grid x:Name="DayProgress" Classes="section" RowDefinitions="Auto,*">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE706;" /><TextBlock x:Name="DayTitle" Classes="h" /></StackPanel>
+          <TextBlock Grid.Column="1" Text="9:00 – 18:00" Classes="tertiary small" FontWeight="SemiBold" VerticalAlignment="Center" />
+        </Grid>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" Spacing="6">
+          <TextBlock x:Name="DayLeft" FontSize="22" FontWeight="Bold" />
+          <ProgressBar x:Name="DayBar" Maximum="1" />
+          <TextBlock x:Name="DayFooter" Classes="secondary small" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+        </StackPanel>
+      </Grid>
+
+      <!-- Quick controls -->
+      <Grid x:Name="QuickControls" Classes="section" RowDefinitions="Auto,*" x:DataType="h:SystemControls" DataContext="{x:Static h:Hub.Controls}">
+        <StackPanel Orientation="Horizontal" Spacing="8"><TextBlock Classes="icon" Text="&#xE9E9;" /><TextBlock x:Name="ControlsTitle" Classes="h" /></StackPanel>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" Spacing="2">
+          <Grid ColumnDefinitions="Auto,*,32" ColumnSpacing="10" IsEnabled="{Binding BrightnessAvailable}">
+            <TextBlock Classes="icon" Text="&#xE706;" Foreground="{StaticResource Accent}" />
+            <Slider Grid.Column="1" Minimum="0" Maximum="1" Value="{Binding Brightness}" />
+            <TextBlock Grid.Column="2" Text="{Binding BrightnessText}" FontWeight="SemiBold" VerticalAlignment="Center" TextAlignment="Right" />
+          </Grid>
+          <Grid ColumnDefinitions="Auto,*,32" ColumnSpacing="10" IsEnabled="{Binding VolumeAvailable}">
+            <Button Classes="plain" Click="OnMute"><TextBlock Classes="icon" Text="{Binding VolumeGlyph}" Foreground="#B48CFF" /></Button>
+            <Slider Grid.Column="1" Minimum="0" Maximum="1" Value="{Binding Volume}" />
+            <TextBlock Grid.Column="2" Text="{Binding VolumeText}" FontWeight="SemiBold" VerticalAlignment="Center" TextAlignment="Right" />
+          </Grid>
+        </StackPanel>
+      </Grid>
+    </Panel>
+  </Panel>
+</UserControl>

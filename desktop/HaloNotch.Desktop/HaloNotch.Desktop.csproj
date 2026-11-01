@@ -2,7 +2,10 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net10.0</TargetFramework>
+    <!-- Windows build (WinRT APIs: media, location, camera) + plain build that runs on macOS/Linux for layout checks. -->
+    <TargetFrameworks>net10.0-windows10.0.19041.0;net10.0</TargetFrameworks>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.19041.0</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>HaloNotch</AssemblyName>
@@ -15,12 +18,25 @@
   <ItemGroup>
     <AvaloniaResource Include="Assets/**" />
     <EmbeddedResource Include="../../shared/translations.json" LogicalName="translations.json" />
+    <EmbeddedResource Include="translations.desktop.json" LogicalName="translations.desktop.json" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="12.1.4" />
     <PackageReference Include="Avalonia.Desktop" Version="12.1.4" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.4" />
+    <PackageReference Include="Ical.Net" Version="5.2.4" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
+    <PackageReference Include="NAudio.Wasapi" Version="3.3.0" />
+    <PackageReference Include="System.Management" Version="10.0.14" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="10.0.14" />
+  </ItemGroup>
+
+  <!-- Windows-only sources (P/Invoke, WinRT) are compiled into the Windows build only. -->
+  <ItemGroup Condition="!$(TargetFramework.Contains('-windows'))">
+    <Compile Remove="Windows/**" />
   </ItemGroup>
 
 </Project>

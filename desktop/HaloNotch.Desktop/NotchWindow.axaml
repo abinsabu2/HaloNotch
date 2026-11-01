@@ -3,12 +3,56 @@
         x:Class="HaloNotch.NotchWindow"
         Title="HaloNotch"
         WindowDecorations="None" Topmost="True" ShowInTaskbar="False" ShowActivated="False" CanResize="False"
-        SizeToContent="WidthAndHeight" Background="Transparent" TransparencyLevelHint="Transparent">
-  <!-- Collapsed: thin handle at the top centre (doesn't cover title bars). Hover: expands to the panel. -->
-  <Border x:Name="Shape" Background="#0B0B0D" Width="200" Height="8" CornerRadius="0,0,8,8">
-    <StackPanel x:Name="Body" IsVisible="False" Margin="28,18" Spacing="14">
-      <TextBlock Text="HaloNotch" FontSize="22" FontWeight="Bold" Foreground="White" />
-      <StackPanel x:Name="Dock" Orientation="Horizontal" Spacing="18" />
-    </StackPanel>
-  </Border>
+        SizeToContent="Manual" Width="200" Height="8"
+        Background="Transparent" TransparencyLevelHint="Transparent"
+        DragDrop.AllowDrop="True">
+  <Panel>
+    <!-- The notch shape: thin handle when closed, panel when open. Content is laid out once at full size and
+         clipped while the shape animates (same idea as the Mac app – no re-flow during the morph). -->
+    <Border x:Name="Shape" HorizontalAlignment="Center" VerticalAlignment="Top" Width="200" Height="8"
+            CornerRadius="0,0,8,8" ClipToBounds="True" Background="{StaticResource PanelBrush}"
+            BorderBrush="#18FFFFFF" BorderThickness="1,0,1,1">
+      <Border.Transitions>
+        <Transitions>
+          <DoubleTransition Property="Width" Duration="0:0:0.32" Easing="CubicEaseOut" />
+          <DoubleTransition Property="Height" Duration="0:0:0.32" Easing="CubicEaseOut" />
+          <CornerRadiusTransition Property="CornerRadius" Duration="0:0:0.32" Easing="CubicEaseOut" />
+        </Transitions>
+      </Border.Transitions>
+      <Panel>
+        <Grid x:Name="Body" Width="920" Height="300" HorizontalAlignment="Center" VerticalAlignment="Top"
+              RowDefinitions="Auto,*" Opacity="0" IsVisible="False">
+          <Grid.Transitions>
+            <Transitions><DoubleTransition Property="Opacity" Duration="0:0:0.18" /></Transitions>
+          </Grid.Transitions>
+          <Grid ColumnDefinitions="*,Auto" Margin="34,12,22,8">
+            <TextBlock x:Name="TitleText" Classes="title" VerticalAlignment="Center" />
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="12">
+              <TextBlock x:Name="DateText" Classes="secondary" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center" />
+              <TextBlock x:Name="TimeText" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" />
+              <Button x:Name="SettingsButton" Classes="icon" Content="&#xE713;" />
+            </StackPanel>
+          </Grid>
+          <ContentControl x:Name="TabHost" Grid.Row="1" Margin="34,0,34,18" />
+        </Grid>
+
+        <!-- Volume / brightness HUD: the closed notch widens and shows a level bar. -->
+        <Grid x:Name="Hud" IsVisible="False" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12" Margin="16,0" VerticalAlignment="Center">
+          <TextBlock x:Name="HudIcon" Classes="icon" FontSize="16" />
+          <ProgressBar x:Name="HudLevel" Grid.Column="1" Minimum="0" Maximum="1" VerticalAlignment="Center" />
+          <TextBlock x:Name="HudValue" Grid.Column="2" FontWeight="SemiBold" Width="30" TextAlignment="Right" />
+        </Grid>
+      </Panel>
+    </Border>
+
+    <!-- Floating section switcher under the panel. -->
+    <Border x:Name="Dock" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,310,0,0" Height="46"
+            CornerRadius="23" Background="#F2141416" BorderBrush="#1FFFFFFF" BorderThickness="1" Padding="6,0"
+            Opacity="0" IsVisible="False">
+      <Border.Transitions>
+        <Transitions><DoubleTransition Property="Opacity" Duration="0:0:0.2" /></Transitions>
+      </Border.Transitions>
+      <StackPanel x:Name="DockItems" Orientation="Horizontal" Spacing="4" VerticalAlignment="Center" />
+    </Border>
+  </Panel>
 </Window>

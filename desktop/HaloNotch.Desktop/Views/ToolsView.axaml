@@ -1,0 +1,79 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:h="using:HaloNotch"
+             xmlns:v="using:HaloNotch.Views"
+             x:Class="HaloNotch.Views.ToolsView"
+             x:DataType="h:FocusTimer">
+  <Grid ColumnDefinitions="*,*,*" ColumnSpacing="14">
+    <!-- Focus -->
+    <Border Classes="card">
+      <Grid RowDefinitions="Auto,*">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <TextBlock Classes="icon" Text="&#xE916;" />
+            <TextBlock Text="{Binding PhaseText}" Classes="caps" VerticalAlignment="Center" />
+          </StackPanel>
+          <TextBlock Grid.Column="1" Text="{Binding SessionsText}" Classes="secondary small" FontWeight="SemiBold" />
+        </Grid>
+        <Grid Grid.Row="1" ColumnDefinitions="Auto,*" ColumnSpacing="16" VerticalAlignment="Center">
+          <Panel Width="120" Height="120">
+            <v:Ring Progress="{Binding Progress}" Thickness="6" />
+            <TextBlock Text="{Binding RemainingText}" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Panel>
+          <StackPanel Grid.Column="1" Spacing="10" VerticalAlignment="Center">
+            <Button Classes="pill" Click="OnToggle" HorizontalAlignment="Left">
+              <StackPanel Orientation="Horizontal" Spacing="6">
+                <TextBlock Classes="icon" Text="{Binding StartGlyph}" Foreground="Black" FontSize="12" />
+                <TextBlock Text="{Binding StartLabel}" Foreground="Black" FontWeight="SemiBold" />
+              </StackPanel>
+            </Button>
+            <StackPanel Orientation="Horizontal" Spacing="6">
+              <Button x:Name="ResetButton" Classes="icon" Content="&#xE72C;" Click="OnReset" />
+              <Button x:Name="SkipButton" Classes="icon" Content="&#xE893;" Click="OnSkip" />
+              <Button x:Name="PresetButton" Classes="chip" Content="{Binding PresetLabel}" Click="OnPreset" />
+            </StackPanel>
+          </StackPanel>
+        </Grid>
+      </Grid>
+    </Border>
+
+    <!-- Notes -->
+    <Border Grid.Column="1" Classes="card" x:DataType="h:NotesStore" DataContext="{x:Static h:Hub.Notes}">
+      <Grid RowDefinitions="Auto,*" RowSpacing="8">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <TextBlock Classes="icon" Text="&#xE70B;" />
+            <TextBlock x:Name="NotesTitle" Classes="caps" VerticalAlignment="Center" />
+          </StackPanel>
+          <TextBlock Grid.Column="1" x:Name="SavedLabel" Classes="secondary small" FontWeight="SemiBold" />
+        </Grid>
+        <TextBox x:Name="NotesBox" Grid.Row="1" Text="{Binding Text}" AcceptsReturn="True" TextWrapping="Wrap" Classes="search" VerticalContentAlignment="Top" />
+      </Grid>
+    </Border>
+
+    <!-- Camera -->
+    <Border Grid.Column="2" Classes="card" x:DataType="h:CameraController" DataContext="{x:Static h:Hub.Camera}">
+      <Grid RowDefinitions="Auto,*" RowSpacing="8">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <TextBlock Classes="icon" Text="&#xE722;" Foreground="#FF6B6B" />
+            <TextBlock x:Name="CameraTitle" Classes="caps" VerticalAlignment="Center" />
+          </StackPanel>
+          <Button Grid.Column="1" x:Name="CameraOff" Classes="chip" Click="OnCameraOff" IsVisible="{Binding IsRunning}" />
+        </Grid>
+        <Border Grid.Row="1" CornerRadius="12" ClipToBounds="True" IsVisible="{Binding IsRunning}">
+          <Image x:Name="CameraImage" Source="{Binding Frame}" Stretch="UniformToFill" RenderTransformOrigin="50%,50%">
+            <Image.RenderTransform><ScaleTransform ScaleX="-1" /></Image.RenderTransform>
+          </Image>
+        </Border>
+        <StackPanel Grid.Row="1" IsVisible="{Binding !IsRunning}" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+          <TextBlock Classes="icon" Text="&#xE77B;" FontSize="30" HorizontalAlignment="Center" Classes.tertiary="True" />
+          <Button x:Name="CameraOn" Classes="pill" HorizontalAlignment="Center" Click="OnCameraOn" IsVisible="{Binding !IsDenied}" />
+          <TextBlock x:Name="CameraHint" Classes="secondary small" HorizontalAlignment="Center" IsVisible="{Binding !IsDenied}" />
+          <TextBlock x:Name="DeniedText" Classes="secondary small" HorizontalAlignment="Center" IsVisible="{Binding IsDenied}" />
+          <Button x:Name="OpenPrivacy" Classes="chip" HorizontalAlignment="Center" Click="OnPrivacy" IsVisible="{Binding IsDenied}" />
+        </StackPanel>
+      </Grid>
+    </Border>
+  </Grid>
+</UserControl>

@@ -1,0 +1,59 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:h="using:HaloNotch"
+             xmlns:v="using:HaloNotch.Views"
+             x:Class="HaloNotch.Views.MediaView"
+             x:DataType="h:MediaController">
+  <Border Classes="card" Padding="16">
+    <Border.Background>
+      <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Offset="0" Color="#33E06A6A" />
+        <GradientStop Offset="1" Color="#0DFFFFFF" />
+      </LinearGradientBrush>
+    </Border.Background>
+    <Grid ColumnDefinitions="Auto,*,Auto,240" ColumnSpacing="20">
+      <!-- Artwork -->
+      <Border Width="190" Height="190" CornerRadius="18" ClipToBounds="True" Background="#33FF6B6B" VerticalAlignment="Center">
+        <Panel>
+          <TextBlock Classes="icon" Text="&#xE8D6;" FontSize="54" HorizontalAlignment="Center" VerticalAlignment="Center" />
+          <Image Source="{Binding Artwork}" Stretch="UniformToFill" />
+        </Panel>
+      </Border>
+
+      <!-- Track, equalizer, progress, transport -->
+      <Grid Grid.Column="1" RowDefinitions="Auto,Auto,Auto,*,Auto,Auto" VerticalAlignment="Stretch">
+        <TextBlock Text="{Binding Source}" Classes="secondary" FontWeight="SemiBold" FontSize="12" />
+        <TextBlock Grid.Row="1" Text="{Binding Title}" FontSize="24" FontWeight="Bold" TextTrimming="CharacterEllipsis" Margin="0,4,0,0" />
+        <TextBlock Grid.Row="2" Text="{Binding ArtistAlbum}" Classes="secondary" FontSize="15" TextTrimming="CharacterEllipsis" />
+        <ContentControl x:Name="EqualizerHost" Grid.Row="3" Height="26" Margin="0,8" VerticalAlignment="Center" />
+        <StackPanel Grid.Row="4" Spacing="4" IsVisible="{Binding HasMedia}">
+          <ProgressBar Value="{Binding Progress}" Maximum="1" PointerPressed="OnSeek" Cursor="Hand" />
+          <Grid ColumnDefinitions="*,*">
+            <TextBlock Text="{Binding ElapsedText}" Classes="tertiary small" />
+            <TextBlock Grid.Column="1" Text="{Binding RemainingText}" Classes="tertiary small" HorizontalAlignment="Right" />
+          </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Orientation="Horizontal" Spacing="14" HorizontalAlignment="Center" Margin="0,6,0,0">
+          <Button Classes="icon plain" Classes.on="{Binding Shuffle}" Content="&#xE8B1;" Click="OnShuffle" Background="Transparent" />
+          <Button Classes="icon large" Content="&#xE892;" Click="OnPrevious" />
+          <Button Classes="icon large hot" Content="{Binding PlayGlyph}" Click="OnPlayPause" Width="54" Height="54" CornerRadius="27" />
+          <Button Classes="icon large" Content="&#xE893;" Click="OnNext" />
+          <Button Classes="icon plain" Classes.on="{Binding Repeat}" Content="&#xE8EE;" Click="OnRepeat" Background="Transparent" />
+        </StackPanel>
+      </Grid>
+
+      <Border Grid.Column="2" Classes="vline" />
+
+      <!-- Output -->
+      <Grid Grid.Column="3" RowDefinitions="Auto,Auto,Auto,*,Auto" x:DataType="h:SystemControls" DataContext="{x:Static h:Hub.Controls}">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Classes="icon" Text="&#xE7F5;" />
+          <TextBlock x:Name="OutputTitle" Classes="h" />
+        </StackPanel>
+        <Slider Grid.Row="1" Minimum="0" Maximum="1" Value="{Binding Volume}" IsEnabled="{Binding VolumeAvailable}" Margin="0,8,0,0" />
+        <TextBlock Grid.Row="2" x:Name="VolumeLabel" Classes="secondary small" />
+        <Button Grid.Row="4" x:Name="OpenPlayerButton" Classes="pill" Click="OnOpenPlayer" HorizontalAlignment="Left" />
+      </Grid>
+    </Grid>
+  </Border>
+</UserControl>

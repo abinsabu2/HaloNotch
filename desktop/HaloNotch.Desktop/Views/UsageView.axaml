@@ -1,0 +1,89 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:h="using:HaloNotch"
+             xmlns:v="using:HaloNotch.Views"
+             x:Class="HaloNotch.Views.UsageView"
+             x:DataType="h:UsageStore">
+  <UserControl.Resources>
+    <DataTemplate x:Key="ToolCard" x:DataType="h:UsageStore+Tool">
+      <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
+        <TextBlock Text="{Binding PlanText}" Classes="secondary small" Margin="0,6,0,0" />
+        <StackPanel Grid.Row="1" Margin="0,4,0,0">
+          <TextBlock Text="{Binding FreshText}" FontSize="30" FontWeight="Bold" />
+          <TextBlock Text="{x:Static v:UsageView.FreshLabel}" Classes="secondary small" />
+        </StackPanel>
+        <Grid Grid.Row="2" ColumnDefinitions="*,Auto,16,*,Auto" RowDefinitions="Auto,Auto,Auto" Margin="0,8,0,0">
+          <TextBlock Text="{x:Static v:UsageView.InputLabel}" Classes="secondary small" />
+          <TextBlock Grid.Column="1" Text="{Binding InputText}" FontWeight="SemiBold" FontSize="12" />
+          <TextBlock Grid.Column="3" Text="{x:Static v:UsageView.CacheReadLabel}" Classes="secondary small" />
+          <TextBlock Grid.Column="4" Text="{Binding CacheReadText}" FontWeight="SemiBold" FontSize="12" />
+          <TextBlock Grid.Row="1" Text="{x:Static v:UsageView.CacheWriteLabel}" Classes="secondary small" />
+          <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding CacheWriteText}" FontWeight="SemiBold" FontSize="12" />
+          <TextBlock Grid.Row="1" Grid.Column="3" Text="{x:Static v:UsageView.ProcessedLabel}" Classes="secondary small" />
+          <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding ProcessedText}" FontWeight="SemiBold" FontSize="12" />
+          <TextBlock Grid.Row="2" Text="{x:Static v:UsageView.OutputLabel}" Classes="secondary small" />
+          <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding OutputText}" FontWeight="SemiBold" FontSize="12" />
+          <TextBlock Grid.Row="2" Grid.Column="3" Text="{x:Static v:UsageView.SessionsLabel}" Classes="secondary small" />
+          <TextBlock Grid.Row="2" Grid.Column="4" Text="{Binding SessionsText}" FontWeight="SemiBold" FontSize="12" />
+        </Grid>
+        <TextBlock Grid.Row="4" Text="{Binding Footer}" Classes="tertiary small" TextTrimming="CharacterEllipsis" />
+      </Grid>
+    </DataTemplate>
+  </UserControl.Resources>
+
+  <Panel>
+    <!-- Opt-in -->
+    <Border Classes="card" IsVisible="{Binding Disabled}">
+      <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="12" MaxWidth="520">
+        <TextBlock Classes="icon" Text="&#xE9D2;" FontSize="28" HorizontalAlignment="Center" Foreground="{StaticResource Accent}" />
+        <TextBlock x:Name="OptInText" Classes="secondary" TextWrapping="Wrap" TextAlignment="Center" />
+        <Button x:Name="EnableButton" Classes="pill" HorizontalAlignment="Center" Click="OnEnable" />
+      </StackPanel>
+    </Border>
+    <TextBlock x:Name="LoadingText" Classes="secondary" IsVisible="{Binding IsLoading}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    <TextBlock x:Name="NotFoundText" Classes="secondary" IsVisible="{Binding NotFound}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+    <Grid IsVisible="{Binding Ready}" ColumnDefinitions="*,*,*" ColumnSpacing="14">
+      <Border Classes="card">
+        <Grid RowDefinitions="Auto,*">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <TextBlock Text="✦" Foreground="{StaticResource Accent}" FontSize="16" />
+            <TextBlock Text="CLAUDE CODE" Classes="caps" VerticalAlignment="Center" />
+          </StackPanel>
+          <ContentControl Grid.Row="1" Content="{Binding Claude}" ContentTemplate="{StaticResource ToolCard}" />
+        </Grid>
+      </Border>
+      <Border Grid.Column="1" Classes="card">
+        <Grid RowDefinitions="Auto,*">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <TextBlock Text="&lt;/&gt;" Foreground="#66A8FF" FontWeight="Bold" />
+            <TextBlock Text="CODEX" Classes="caps" VerticalAlignment="Center" />
+          </StackPanel>
+          <ContentControl Grid.Row="1" Content="{Binding Codex}" ContentTemplate="{StaticResource ToolCard}" />
+        </Grid>
+      </Border>
+      <Border Grid.Column="2" Classes="card">
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,*,Auto" RowSpacing="6">
+          <TextBlock x:Name="ActivityTitle" Classes="caps" />
+          <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="6">
+            <Button x:Name="AllChip" Classes="chip" Click="OnSource" Tag="all" />
+            <Button Classes="chip" Content="Claude" Click="OnSource" Tag="claude" x:Name="ClaudeChip" />
+            <Button Classes="chip" Content="Codex" Click="OnSource" Tag="codex" x:Name="CodexChip" />
+          </StackPanel>
+          <ItemsControl Grid.Row="2" ItemsSource="{Binding Heatmap}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate><WrapPanel Orientation="Vertical" Height="91" /></ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="h:UsageStore+Cell">
+                <Border Width="11" Height="11" CornerRadius="3" Margin="0,0,2,2" Background="{Binding Brush}" />
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+          <TextBlock Grid.Row="3" Text="{Binding ActiveDays}" Classes="secondary small" />
+          <TextBlock Grid.Row="5" x:Name="Footnote" Classes="tertiary small" TextWrapping="Wrap" />
+        </Grid>
+      </Border>
+    </Grid>
+  </Panel>
+</UserControl>

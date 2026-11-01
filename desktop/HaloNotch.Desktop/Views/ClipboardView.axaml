@@ -1,0 +1,72 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:h="using:HaloNotch"
+             xmlns:v="using:HaloNotch.Views"
+             x:Class="HaloNotch.Views.ClipboardView"
+             x:DataType="h:ClipboardStore">
+  <UserControl.Resources>
+    <DataTemplate x:Key="Entry" x:DataType="h:ClipItem">
+      <Button Classes="row" Click="OnCopy" Margin="0,0,0,4" Background="{StaticResource Fill}">
+        <Button.ContextMenu>
+          <ContextMenu Opened="OnMenuOpened" Closed="OnMenuClosed">
+            <MenuItem Header="{x:Static v:ClipboardView.CopyText}" Click="OnCopy" />
+            <MenuItem Header="{Binding PinLabel}" Click="OnPin" />
+            <MenuItem Header="{x:Static v:ClipboardView.VaultText}" Click="OnMoveToVault" IsVisible="{Binding IsText}" />
+            <MenuItem Header="{x:Static v:ClipboardView.RemoveText}" Click="OnRemove" />
+          </ContextMenu>
+        </Button.ContextMenu>
+        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="6">
+          <Border IsVisible="{Binding Shortcut, Converter={x:Static ObjectConverters.IsNotNull}}" CornerRadius="5"
+                  Background="{StaticResource FillHover}" Width="16" Height="16" VerticalAlignment="Top" Margin="0,1,0,0">
+            <TextBlock Text="{Binding Shortcut}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Classes="secondary" />
+          </Border>
+          <Panel Grid.Column="1">
+            <TextBlock Text="{Binding Preview}" IsVisible="{Binding ShowText}" TextWrapping="Wrap" MaxLines="3" TextTrimming="CharacterEllipsis" FontSize="12" />
+            <v:HighlightedText IsVisible="{Binding ShowCode}" TextWrapping="Wrap" MaxLines="4" TextTrimming="CharacterEllipsis"
+                               FontFamily="Cascadia Mono, Consolas, monospace" FontSize="11" />
+            <StackPanel Orientation="Horizontal" Spacing="8" IsVisible="{Binding ShowColor}">
+              <Border Width="18" Height="18" CornerRadius="9" Background="{Binding SwatchBrush}" BorderBrush="#33FFFFFF" BorderThickness="1" />
+              <TextBlock Text="{Binding Preview}" FontFamily="Cascadia Mono, Consolas, monospace" FontSize="11" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel IsVisible="{Binding ShowImage}" Spacing="3">
+              <Border CornerRadius="8" ClipToBounds="True" HorizontalAlignment="Left">
+                <Image Source="{Binding Image}" MaxHeight="70" Stretch="Uniform" />
+              </Border>
+              <TextBlock Text="{Binding Preview}" Classes="tertiary small" IsVisible="{Binding IsFiles}" TextTrimming="CharacterEllipsis" />
+            </StackPanel>
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8" IsVisible="{Binding ShowFiles}">
+              <TextBlock Classes="icon" Text="&#xE8A5;" Foreground="{StaticResource Accent}" />
+              <StackPanel Grid.Column="1">
+                <TextBlock Text="{Binding Preview}" FontSize="12" TextTrimming="CharacterEllipsis" />
+                <TextBlock Text="{Binding Detail}" Classes="tertiary small" TextTrimming="CharacterEllipsis" />
+              </StackPanel>
+            </Grid>
+          </Panel>
+          <TextBlock Grid.Column="2" Classes="icon small" FontSize="11" VerticalAlignment="Top"
+                     Text="{Binding IsCopied, Converter={x:Static h:Conv.CopiedGlyph}}"
+                     Foreground="{StaticResource Accent}" IsVisible="{Binding IsPinned}" />
+        </Grid>
+      </Button>
+    </DataTemplate>
+  </UserControl.Resources>
+
+  <Grid RowDefinitions="Auto,Auto,*" RowSpacing="8">
+    <StackPanel x:Name="KeyboardHint" Orientation="Horizontal" Spacing="8" IsVisible="False">
+      <TextBlock Classes="icon" Text="&#xE765;" Foreground="{StaticResource Accent}" />
+      <TextBlock x:Name="KeyboardHintText" FontWeight="SemiBold" FontSize="12" VerticalAlignment="Center" />
+    </StackPanel>
+    <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+      <TextBox x:Name="Search" Classes="search" Text="{Binding Query}" />
+      <Button x:Name="VaultButton" Grid.Column="1" Classes="chip" Click="OnToggleVault">
+        <StackPanel Orientation="Horizontal" Spacing="6">
+          <TextBlock Classes="icon" FontSize="12" Text="&#xE72E;" />
+          <TextBlock x:Name="VaultLabel" FontSize="12" FontWeight="SemiBold" />
+        </StackPanel>
+      </Button>
+    </Grid>
+    <Border x:Name="Columns" Grid.Row="2" Classes="card" Padding="0" ClipToBounds="True">
+      <Grid x:Name="ColumnGrid" />
+    </Border>
+    <ContentControl x:Name="VaultHost" Grid.Row="2" IsVisible="False" />
+  </Grid>
+</UserControl>

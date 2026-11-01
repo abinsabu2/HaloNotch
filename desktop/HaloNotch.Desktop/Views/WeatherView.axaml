@@ -1,0 +1,87 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:h="using:HaloNotch"
+             x:Class="HaloNotch.Views.WeatherView"
+             x:DataType="h:WeatherStore">
+  <Border x:Name="Sky" CornerRadius="18" Padding="18,14" BorderBrush="#1FFFFFFF" BorderThickness="1">
+    <Panel>
+      <!-- No data yet -->
+      <StackPanel IsVisible="{Binding NoData}" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+        <TextBlock Text="☁️" Classes="emoji" FontSize="30" HorizontalAlignment="Center" />
+        <TextBlock Text="{Binding Description}" Classes="secondary" TextWrapping="Wrap" TextAlignment="Center" MaxWidth="420" />
+        <Button x:Name="SettingsButton" Classes="pill" HorizontalAlignment="Center" Click="OnSettings" />
+      </StackPanel>
+
+      <Grid IsVisible="{Binding HasData}" ColumnDefinitions="300,Auto,*" ColumnSpacing="18">
+        <!-- Now -->
+        <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
+          <StackPanel Orientation="Horizontal" Spacing="6">
+            <TextBlock Classes="icon" FontSize="12" Text="&#xE81D;" />
+            <TextBlock Text="{Binding PlaceName}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+          </StackPanel>
+          <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="12" Margin="0,4,0,0">
+            <TextBlock Text="{Binding Temperature}" FontSize="58" FontWeight="Bold" />
+            <StackPanel VerticalAlignment="Center">
+              <TextBlock Text="{Binding Icon}" Classes="emoji" FontSize="30" />
+              <TextBlock Text="{Binding Description}" FontWeight="SemiBold" FontSize="15" />
+            </StackPanel>
+          </StackPanel>
+          <TextBlock Grid.Row="2" Text="{Binding HighLowLong}" Classes="secondary" FontWeight="SemiBold" />
+          <UniformGrid Grid.Row="4" Columns="2" Rows="2">
+            <Border Background="#1AFFFFFF" CornerRadius="10" Padding="10,5" Margin="0,0,6,6">
+              <StackPanel><TextBlock x:Name="HumidityLabel" Classes="caps" FontSize="9" /><TextBlock Text="{Binding Humidity}" FontWeight="SemiBold" /></StackPanel>
+            </Border>
+            <Border Background="#1AFFFFFF" CornerRadius="10" Padding="10,5" Margin="0,0,0,6">
+              <StackPanel><TextBlock x:Name="WindLabel" Classes="caps" FontSize="9" /><TextBlock Text="{Binding Wind}" FontWeight="SemiBold" /></StackPanel>
+            </Border>
+            <Border Background="#1AFFFFFF" CornerRadius="10" Padding="10,5" Margin="0,0,6,0">
+              <StackPanel><TextBlock x:Name="UvLabel" Classes="caps" FontSize="9" /><TextBlock Text="{Binding Uv}" FontWeight="SemiBold" /></StackPanel>
+            </Border>
+            <Border Background="#1AFFFFFF" CornerRadius="10" Padding="10,5">
+              <StackPanel><TextBlock x:Name="PressureLabel" Classes="caps" FontSize="9" /><TextBlock Text="{Binding Pressure}" FontWeight="SemiBold" /></StackPanel>
+            </Border>
+          </UniformGrid>
+        </Grid>
+
+        <Border Grid.Column="1" Classes="vline" Background="#26FFFFFF" />
+
+        <!-- Hourly + week -->
+        <Grid Grid.Column="2" RowDefinitions="Auto,Auto,*" RowSpacing="8">
+          <Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="16">
+            <TextBlock><Run Text="🌅" FontFamily="Segoe UI Emoji" /><Run Text=" " /><Run Text="{Binding Sunrise}" FontWeight="SemiBold" /></TextBlock>
+            <TextBlock Grid.Column="1"><Run Text="🌇" FontFamily="Segoe UI Emoji" /><Run Text=" " /><Run Text="{Binding Sunset}" FontWeight="SemiBold" /></TextBlock>
+            <TextBlock Grid.Column="2" Text="{Binding Updated}" Classes="secondary small" HorizontalAlignment="Right" />
+          </Grid>
+          <Border Grid.Row="1" Background="#1AFFFFFF" CornerRadius="12" Padding="8,6">
+            <ItemsControl ItemsSource="{Binding Hours}">
+              <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Rows="1" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="h:WeatherStore+Hour">
+                  <StackPanel Spacing="2" HorizontalAlignment="Center">
+                    <TextBlock Text="{Binding Label}" Classes="secondary small" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                    <TextBlock Text="{Binding Icon}" Classes="emoji" FontSize="15" HorizontalAlignment="Center" />
+                    <TextBlock Text="{Binding Temp}" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                  </StackPanel>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </Border>
+          <ItemsControl Grid.Row="2" ItemsSource="{Binding Days}">
+            <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Rows="1" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="h:WeatherStore+Day">
+                <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" HorizontalAlignment="Center">
+                  <TextBlock Text="{Binding Label}" Classes="secondary small" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                  <TextBlock Grid.Row="1" Text="{Binding Icon}" Classes="emoji" FontSize="15" HorizontalAlignment="Center" />
+                  <TextBlock Grid.Row="2" Text="{Binding HighText}" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                  <h:RangeBar Grid.Row="3" Width="5" Start="{Binding RangeStart}" Length="{Binding RangeWidth}" Margin="0,3" />
+                  <TextBlock Grid.Row="4" Text="{Binding LowText}" Classes="secondary small" HorizontalAlignment="Center" />
+                </Grid>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </Grid>
+      </Grid>
+    </Panel>
+  </Border>
+</UserControl>
